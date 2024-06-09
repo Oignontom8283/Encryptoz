@@ -1,5 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<data>
-    <hint>Bonne question</hint>
-    <content>KGJbDbs jD P9Jb HbG 5YjP YézbV bJ V059lb bD u9D9f90DJ Yb CLlb mO IOO !0SpZqbB</content>
-</data>
+
+{
+    "version": "1.0.0",
+
+    "hint": "Bonne question",
+    "hash": "$2b$12$4s9uHuqlMl7qvyJGs4Z16udPJH3dCEUx33iO87uQJjR.IMIvqT7XS",
+    "content": "KGJbDbs jD P9Jb HbG 5YjP YézbV bJ V059lb bD u9D9f90DJ Yb CLlb mO IOO !0SpZqbB"
+}
