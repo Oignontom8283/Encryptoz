@@ -1,6 +1,4 @@
-import hashlib
-import random
-import string
+import hashlib, random, string
 
 def generate_substitution_table(key):
     # Crée une seed à partir de la clé pour assurer la reproductibilité

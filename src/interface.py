@@ -1,8 +1,8 @@
-from PyQt5.QtWidgets import QMessageBox, QTextBrowser, QPlainTextEdit, QTabWidget,QLineEdit, QRadioButton, QDialog, QFileDialog, QComboBox, QLabel, QPushButton, QCheckBox, QScrollArea, QWidget, QVBoxLayout
-from PyQt5.uic import loadUiType, loadUi
-from PyQt5 import QtGui, QtWidgets, QtCore
 import os, json, sys
-from utility import resource_path, Res, Intercafe_File, hash_password, check_password
+from PyQt5.QtWidgets import QMessageBox, QTextBrowser, QPlainTextEdit, QTabWidget,QLineEdit, QRadioButton, QDialog, QFileDialog, QLabel, QPushButton
+from PyQt5.uic import loadUiType, loadUi
+from PyQt5 import QtGui, QtCore
+from utility import Res, Intercafe_File, resource_path, hash_password, check_password, Set_LineInput_Password
 from crypting import encrypt, decrypt
 import xml.etree.ElementTree as ET
 
@@ -22,7 +22,7 @@ class Main_UI(Window_Main[1], Window_Main[0]):
         super(Main_UI, self).__init__()
         self.setupUi(self)
         
-        self.path = os.path.abspath(path)
+        self.path = path
 
         # Items list
 
@@ -60,10 +60,12 @@ class Main_UI(Window_Main[1], Window_Main[0]):
     def Check_Encoding_Radio(self, e:bool):
         # Si le Radio et check on mais le champ de texte en mods password
 
-        if e:
-            self.Encoding_Input.setEchoMode(QtWidgets.QLineEdit.Password)
-        else:
-            self.Encoding_Input.setEchoMode(QtWidgets.QLineEdit.Normal)
+        # if e:
+        #     self.Encoding_Input.setEchoMode(QtWidgets.QLineEdit.Password)
+        # else:
+        #     self.Encoding_Input.setEchoMode(QtWidgets.QLineEdit.Normal)
+
+        Set_LineInput_Password(self.Encoding_Input, e)
 
     def TextChange_Text_Edit(self):
 
@@ -74,7 +76,9 @@ class Main_UI(Window_Main[1], Window_Main[0]):
     def show(self):
         super().show()
 
-        if self.path is not None:
+        if self.path is not None:   
+
+            self.path = os.path.abspath(self.path)
 
             # Chargement du contenue du fichier
             with open(self.path, "r", encoding="utf-8") as self.file:
@@ -138,7 +142,7 @@ class KeyInput_UI(QDialog, Window_KeyInput[1], Window_KeyInput[0]):
         # Builds
 
         self.Decrypt_Button.setEnabled(False)
-        self.Decrypt_Button.setCursor(QtGui.QCursor(QtCore.Qt.ForbiddenCursor))
+        #self.Decrypt_Button.setCursor(QtGui.QCursor(QtCore.Qt.ForbiddenCursor))
 
         self.Label_FileName.setText(os.path.basename(self.path))
         self.Label_FIlePath.setText(self.path)
@@ -151,19 +155,11 @@ class KeyInput_UI(QDialog, Window_KeyInput[1], Window_KeyInput[0]):
 
     def Check_Key_Radio(self, e):
         # Si le Radio et check on mais le champ de texte en mods password
-
-        if e:
-            self.Key_Input.setEchoMode(QtWidgets.QLineEdit.Password)
-        else:
-            self.Key_Input.setEchoMode(QtWidgets.QLineEdit.Normal)
+        Set_LineInput_Password(self.Key_Input, e)
 
     def Button_isEnabled(self):
-        if self.Key_Input.text() == "":
-            self.Decrypt_Button.setEnabled(False)
-            self.Decrypt_Button.setCursor(QtGui.QCursor(QtCore.Qt.ForbiddenCursor))
-        else:
-            self.Decrypt_Button.setEnabled(True)
-            self.Decrypt_Button.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
+        self.Decrypt_Button.setEnabled(self.Key_Input.text() is not "")
+
 
     def decrypt(self):
         

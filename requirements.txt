@@ -1,6 +1,14 @@
 # requirements.txt
 
+altgraph==0.17.4
 bcrypt==4.0.1
+importlib-metadata==4.8.3
+pefile==2023.2.7
+pyinstaller==4.10
+pyinstaller-hooks-contrib==2022.0
 PyQt5==5.15.6
 PyQt5-Qt5==5.15.2
 PyQt5-sip==12.9.1
+pywin32-ctypes==0.2.2
+typing_extensions==4.1.1
+zipp==3.6.0

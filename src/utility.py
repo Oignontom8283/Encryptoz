@@ -1,5 +1,6 @@
 import sys, os, bcrypt
 from enum import Enum
+from PyQt5.QtWidgets import QLineEdit
 
 class Res(Enum):
     SaveIcon = "resources/save.png"
@@ -19,8 +20,14 @@ def resource_path(relative_path: Res):
 
     return os.path.join(base_path, relative_path.value)
 
-def Decryption(data, key):
-    pass
+
+def Set_LineInput_Password(object:QLineEdit, state:bool):
+    """
+    If @staet is True put the QlineEdit in Password mode otherwise put it in Normal mods
+    """
+
+    object.setEchoMode(QLineEdit.Password if state else QLineEdit.Normal)
+
 
 def hash_password(password: str) -> str:
     # Convertir le mot de passe en bytes
@@ -30,6 +37,7 @@ def hash_password(password: str) -> str:
     hashed_password = bcrypt.hashpw(password_bytes, salt)
     # Retourner le mot de passe haché sous forme de chaîne de caractères
     return hashed_password.decode('utf-8')
+
 
 # Fonction pour vérifier un mot de passe haché
 def check_password(password: str, hashed_password: str) -> bool:
