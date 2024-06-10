@@ -1,8 +1,8 @@
 import os, json, sys
-from PyQt5.QtWidgets import QMessageBox, QTextBrowser, QPlainTextEdit, QTabWidget,QLineEdit, QRadioButton, QDialog, QFileDialog, QLabel, QPushButton
+from PyQt5.QtWidgets import QStatusBar, QMessageBox, QTextBrowser, QPlainTextEdit, QTabWidget,QLineEdit, QRadioButton, QDialog, QFileDialog, QLabel, QPushButton
 from PyQt5.uic import loadUiType, loadUi
 from PyQt5 import QtGui, QtCore
-from utility import Res, Intercafe_File, resource_path, hash_password, check_password, Set_LineInput_Password
+from utility import __version__, Res, Intercafe_File, resource_path, hash_password, check_password, Set_LineInput_Password, create_db, connect_db, fetch_data_from_db, update_db
 from crypting import encrypt, decrypt
 import xml.etree.ElementTree as ET
 
@@ -33,8 +33,14 @@ class Main_UI(Window_Main[1], Window_Main[0]):
         self.Encoding_Input :QLineEdit
         self.Encoding_Label :QLabel
         self.Encoding_Radio :QRadioButton
+        self.statusbar      :QStatusBar
 
         # Set resources element
+
+        # Build status bar
+        self.FilePathLabel = QLabel('')
+
+        self.statusbar.addWidget(self.FilePathLabel)
 
         # Set Save_Button icon
         icon = QtGui.QIcon()
@@ -50,6 +56,7 @@ class Main_UI(Window_Main[1], Window_Main[0]):
 
         # Uncrypting
 
+        self.db = None
         self.key = None
         self.Encrypt_Content = None
         self.hint = None
@@ -68,10 +75,9 @@ class Main_UI(Window_Main[1], Window_Main[0]):
         Set_LineInput_Password(self.Encoding_Input, e)
 
     def TextChange_Text_Edit(self):
-
-        self.Text_Display.setMarkdown(
-            self.Text_Edit.toPlainText()
-        )
+        text = self.Text_Edit.toPlainText()
+        self.Text_Display.setMarkdown( text )
+        self.Save_Button.setEnabled( text != self.Content)
     
     def show(self):
         super().show()
@@ -81,13 +87,15 @@ class Main_UI(Window_Main[1], Window_Main[0]):
             self.path = os.path.abspath(self.path)
 
             # Chargement du contenue du fichier
-            with open(self.path, "r", encoding="utf-8") as self.file:
-                root = json.load(self.file)
+            self.db = connect_db(self.path)
 
             # Load data
-            self.Encrypt_Content:str = root["content"]
-            self.hint:str = root["hint"]
-            self.hash:str = root["hash"]
+
+            data = fetch_data_from_db(self.db)
+            self.file_version = data[0]
+            self.hint:str = data[1]
+            self.hash:str = data[2]
+            self.Encrypt_Content:str = data[3]
 
             if self.Encrypt_Content is None or self.hint is None:
                 raise IndexError()
@@ -116,10 +124,68 @@ class Main_UI(Window_Main[1], Window_Main[0]):
         
     def Clicked_SaveButton(self):
         
+        key = self.Encoding_Input.text()
+        if key is "":
+            QMessageBox.information(self, "WARNIG !", "You did not specify an encryption key !")
+            return
+
+        text = self.Text_Edit.toPlainText()
+
+        self.Save_Button.setEnabled(False)
+        self.Text_Edit.setFocus()
+
         if self.path is None:
+
             options = QFileDialog.Options()
             fileName, _ = QFileDialog.getSaveFileName(self, "Save file", "", "Encryptoz file (*.eyz);;All the files (*)", options=options)
             print(fileName)
+            if fileName is "":
+                return
+
+            self.db = create_db(fileName)
+            self.key = key
+            self.Encrypt_Content = encrypt(text, key)
+            self.hint = "truc"
+            self.hash = hash_password(key)
+            self.Content = text
+            self.path = fileName
+
+            update_db(
+                db=self.db,
+                version=__version__,
+                hint=self.hint,
+                hash=self.hash,
+                content=self.Encrypt_Content
+            )
+
+        else:
+
+            if self.key != key:
+                reply = QMessageBox.question(self, 'the key is different !', 'The encryption key is different. Are you sure you want to change it?',
+                                         QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+
+                if reply == QMessageBox.Yes:
+                    pass
+                else:
+                    return
+            
+            self.key = key
+            self.Encrypt_Content = encrypt(text, key)
+            self.hint = "h"
+            self.hash = hash_password(key)
+            self.Content = text
+
+            update_db(
+                self.db,
+                version=self.file_version,
+                hint=self.hint,
+                hash=self.hash,
+                content=self.Encrypt_Content
+            )
+
+            
+
+
 
 class KeyInput_UI(QDialog, Window_KeyInput[1], Window_KeyInput[0]):
     
