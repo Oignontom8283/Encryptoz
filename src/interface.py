@@ -39,8 +39,10 @@ class Main_UI(Window_Main[1], Window_Main[0]):
 
         # Build status bar
         self.FilePathLabel = QLabel('')
+        self.SaveIndicate = QLabel('')
 
         self.statusbar.addWidget(self.FilePathLabel)
+        self.statusbar.addPermanentWidget(self.SaveIndicate)
 
         # Set Save_Button icon
         icon = QtGui.QIcon()
@@ -121,6 +123,8 @@ class Main_UI(Window_Main[1], Window_Main[0]):
             self.Text_Edit.setPlainText(self.Content)
             self.Text_Display.setMarkdown(self.Content)
             self.Encoding_Input.setText(self.key)
+
+            self.FilePathLabel.setText(self.path)
         
     def Clicked_SaveButton(self):
         
@@ -128,11 +132,18 @@ class Main_UI(Window_Main[1], Window_Main[0]):
         if key is "":
             QMessageBox.information(self, "WARNIG !", "You did not specify an encryption key !")
             return
+        
 
-        text = self.Text_Edit.toPlainText()
+        # self.SaveIndicate.setText("Saving...")
+        # timer = QtCore.QTime()
+        # timer.setSingleShot(True)  # Assurez-vous que le timer se déclenche une seule fois
+        # timer.timeout.connect(lambda: self.SaveIndicate.setText(""))
 
         self.Save_Button.setEnabled(False)
         self.Text_Edit.setFocus()
+
+        text = self.Text_Edit.toPlainText()
+
 
         if self.path is None:
 
@@ -149,14 +160,7 @@ class Main_UI(Window_Main[1], Window_Main[0]):
             self.hash = hash_password(key)
             self.Content = text
             self.path = fileName
-
-            update_db(
-                db=self.db,
-                version=__version__,
-                hint=self.hint,
-                hash=self.hash,
-                content=self.Encrypt_Content
-            )
+            self.file_version = __version__
 
         else:
 
@@ -175,6 +179,7 @@ class Main_UI(Window_Main[1], Window_Main[0]):
             self.hash = hash_password(key)
             self.Content = text
 
+        try:
             update_db(
                 self.db,
                 version=self.file_version,
@@ -182,9 +187,11 @@ class Main_UI(Window_Main[1], Window_Main[0]):
                 hash=self.hash,
                 content=self.Encrypt_Content
             )
+        except Exception as e:
+            QMessageBox.information(self, "ERROR", str(e))
 
-            
-
+        # timer.start(1000)
+        
 
 
 class KeyInput_UI(QDialog, Window_KeyInput[1], Window_KeyInput[0]):
