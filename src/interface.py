@@ -154,18 +154,13 @@ class Main_UI(Window_Main[1], Window_Main[0]):
                 return
 
             self.db = create_db(fileName)
-            self.key = key
-            self.Encrypt_Content = encrypt(text, key)
-            self.hint = "truc"
-            self.hash = hash_password(key)
-            self.Content = text
             self.path = fileName
             self.file_version = __version__
 
         else:
 
             if self.key != key:
-                reply = QMessageBox.question(self, 'the key is different !', 'The encryption key is different. Are you sure you want to change it?',
+                reply = QMessageBox.question(self, 'the key is different !', 'The encryption key is different. Are you sure you want to change it ?',
                                          QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
 
                 if reply == QMessageBox.Yes:
@@ -173,12 +168,15 @@ class Main_UI(Window_Main[1], Window_Main[0]):
                 else:
                     return
             
-            self.key = key
-            self.Encrypt_Content = encrypt(text, key)
-            self.hint = "h"
-            self.hash = hash_password(key)
-            self.Content = text
-
+            
+            
+            
+        self.hint = "h"
+        self.Content = text
+        self.hash = hash_password(key)
+        self.Encrypt_Content = encrypt(text, key)
+        self.key = key
+        
         try:
             update_db(
                 self.db,

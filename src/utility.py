@@ -1,4 +1,4 @@
-import sys, os, bcrypt, sqlite3
+import sys, os, bcrypt, sqlite3, datetime, logging
 from enum import Enum
 from PyQt5.QtWidgets import QLineEdit
 
@@ -11,7 +11,11 @@ class Intercafe_File(Enum):
     main = "interface/main.ui"
     key_input = "interface/key_input.ui"
 
-def resource_path(relative_path: Res):
+def resource_path(ressource_path: Res):
+    """ Get absolute path to resource, works for dev and for PyInstaller """
+    return absolute_path(ressource_path.value)
+
+def absolute_path(relative_path:str):
     """ Get absolute path to resource, works for dev and for PyInstaller """
     try:
         # PyInstaller creates a temp folder and stores path in _MEIPASS
@@ -20,7 +24,7 @@ def resource_path(relative_path: Res):
     except Exception:
         base_path = os.path.abspath(os.path.dirname(__file__))
 
-    return os.path.join(base_path, relative_path.value)
+    return os.path.join(base_path, relative_path)
 
 
 def Set_LineInput_Password(object:QLineEdit, state:bool):
@@ -148,3 +152,53 @@ def update_db(db:Database, version, hint, hash, content):
                       (version, hint, hash, content, "1"))
 
     db.conn.commit()
+
+class console():
+
+    LogFile = None
+    log = None
+
+    @classmethod
+    def __init__(cls, LogFile:str=None) -> None:
+        
+        cls.LogFile = absolute_path( f'log/{ Get_UTC_time(format="%Y-%m-%d %H.%M.%S") } (UTC).log' ) if LogFile is None else LogFile
+        
+        DirPath = os.path.dirname(cls.LogFile)
+        os.makedirs(DirPath, exist_ok=True)
+
+        # Création d'un logger
+        cls.log = logging.getLogger('logger')
+        cls.log.setLevel(logging.DEBUG)
+
+        # Création d'un gestionnaire de fichier
+        file_handler = logging.FileHandler(cls.LogFile, encoding="utf-8")
+        file_handler.setLevel(logging.DEBUG)
+
+        # Création d'un gestionnaire de flux (console)
+        console_handler = logging.StreamHandler()
+        console_handler.setLevel(logging.WARNING)
+
+        # Création d'un formateur et ajout au gestionnaire de fichier
+        formatter = logging.Formatter('[%(asctime)s - %(levelname)s] : %(message)s')
+        file_handler.setFormatter(formatter)
+        console_handler.setFormatter(formatter)
+
+        # Ajout des gestionnaires au logger
+        cls.log.addHandler(file_handler)
+        cls.log.addHandler(console_handler)
+
+        # Utilisation du logger
+
+        # self.logger.debug("Ceci est un message de débogage.")
+        # self.logger.info("Ceci est un message d'information.")
+        # self.logger.warning("Ceci est un message d'avertissement.")
+        # self.logger.error("Ceci est un message d'erreur.")
+        # self.logger.critical("Ceci est un message critique.")
+
+
+
+def Get_UTC_time(TimeZone:datetime.timezone=datetime.timezone.utc, format:str="%Y-%m-%d %H:%M:%S"):
+    # Obtenir l'heure actuelle au format UTC avec un objet timezone-aware
+    heure_utc = datetime.datetime.now(TimeZone)
+
+    return heure_utc.strftime(format)
