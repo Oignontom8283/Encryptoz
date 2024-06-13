@@ -1,14 +1,12 @@
-import sys, argparse
+import sys, argparse, configparser
 from interface import Main_UI
 from PyQt5.QtWidgets import QApplication
+from utility import console, Config, absolute_path
 
 if __name__ == "__main__":
     app = QApplication([])
 
-    # file_path = None
-    # if len(sys.argv) > 1:
-    #     file_path = sys.argv[1]
-    #     print(f"File_path : ${file_path}")
+    # ARGUMENT GET
 
     parser = argparse.ArgumentParser(description="")
     
@@ -20,6 +18,22 @@ if __name__ == "__main__":
     # Récupération des valeurs des arguments
     file_path, debug_mode = args.file_path, args.debug
 
+
+    # LOAD CONFIG
+
+    Config(absolute_path("./.env"))
+
+    Log_directory = Config.get("Log", "directory")
+    Log_max_memory = Config.get("Log", "max_memory")
+    Log_max_age = Config.get("Log", "max_age")
+
+
+    # INIT LOG SYSTEM
+
+    console(Log_directory)
+
+
+    # START UI
 
     Start_UI = Main_UI(file_path)
     Start_UI.show()

@@ -1,4 +1,4 @@
-import sys, os, bcrypt, sqlite3, datetime, logging
+import sys, os, bcrypt, sqlite3, datetime, logging, datetime, configparser
 from enum import Enum
 from PyQt5.QtWidgets import QLineEdit
 
@@ -155,20 +155,22 @@ def update_db(db:Database, version, hint, hash, content):
 
 class console():
 
+    __version__ = "1.0.0"
+
     LogFile = None
-    log = None
+    loggin = None
 
     @classmethod
-    def __init__(cls, LogFile:str=None) -> None:
+    def __init__(cls, LogsDirectory:str, LogFile:str=None) -> None:
         
-        cls.LogFile = absolute_path( f'log/{ Get_UTC_time(format="%Y-%m-%d %H.%M.%S") } (UTC).log' ) if LogFile is None else LogFile
+        cls.LogFile = absolute_path( f'{LogsDirectory}/{ Get_UTC_time(format="%Y-%m-%d %H.%M.%S") } (UTC).log' ) if LogFile is None else LogFile
         
         DirPath = os.path.dirname(cls.LogFile)
         os.makedirs(DirPath, exist_ok=True)
 
         # Création d'un logger
-        cls.log = logging.getLogger('logger')
-        cls.log.setLevel(logging.DEBUG)
+        cls.loggin = logging.getLogger('logger')
+        cls.loggin.setLevel(logging.DEBUG)
 
         # Création d'un gestionnaire de fichier
         file_handler = logging.FileHandler(cls.LogFile, encoding="utf-8")
@@ -184,8 +186,8 @@ class console():
         console_handler.setFormatter(formatter)
 
         # Ajout des gestionnaires au logger
-        cls.log.addHandler(file_handler)
-        cls.log.addHandler(console_handler)
+        cls.loggin.addHandler(file_handler)
+        cls.loggin.addHandler(console_handler)
 
         # Utilisation du logger
 
@@ -195,7 +197,125 @@ class console():
         # self.logger.error("Ceci est un message d'erreur.")
         # self.logger.critical("Ceci est un message critique.")
 
+    @classmethod
+    def _convert_memory(cls, memory_str:str):
+        """Convert memory size from string to bytes."""
+        unit = memory_str.strip() [-2:] .lower()
+        size = int( memory_str[:-2] .strip() )
+        if unit == 'ko':
+            return size * 1024
+        elif unit == 'mo':
+            return size * 1024 * 1024
+        elif unit == 'go':
+            return size * 1024 * 1024 * 1024
+        else:
+            raise ValueError("Unsupported memory unit. Use 'Ko', 'Mo', or 'Go'.")
 
+    @classmethod
+    def _convert_time(cls, time_str:str):
+        """Convert time duration from string to seconds."""
+        unit = time_str.strip() [-1] .lower()
+        value = int( time_str[:-1] .strip() )
+        if unit == 's':
+            return datetime.timedelta(seconds=value)
+        elif unit == 'm':
+            return datetime.timedelta(minutes=value)
+        elif unit == 'h':
+            return datetime.timedelta(hours=value)
+        elif unit == 'd':
+            return datetime.timedelta(days=value)
+        else:
+            raise ValueError("Unsupported time unit. Use 's' for seconds, 'm' for minutes, 'h' for hours, or 'D' for days.")
+
+    @classmethod
+    def delete_old_logs(cls, directory, max_memory, max_age):
+        # Convert max_memory from string to bytes
+        max_memory_bytes = cls._convert_memory(max_memory)
+        # Convert max_age from string to timedelta
+        max_age_timedelta = cls._convert_time(max_age)
+        # Calculate the cutoff time
+        cutoff_time = datetime.now() - max_age_timedelta
+
+        total_size = 0
+        log_files = []
+
+        # Gather all .log files and calculate the total size
+        for filename in os.listdir(directory):
+            if filename.endswith('.log'):
+                filepath = os.path.join(directory, filename)
+                file_stats = os.stat(filepath)
+                file_size = file_stats.st_size
+                file_mtime = datetime.fromtimestamp(file_stats.st_mtime)
+
+                total_size += file_size
+                log_files.append((filepath, file_size, file_mtime))
+
+        # Check if the total size exceeds the maximum allowed size
+        if total_size > max_memory_bytes:
+            # Sort files by modification time (oldest first)
+            log_files.sort(key=lambda x: x[2])
+            for filepath, file_size, file_mtime in log_files:
+                # Check if the file is older than the cutoff time
+                if file_mtime < cutoff_time:
+                    os.remove(filepath)
+                    total_size -= file_size
+                    print(f"Deleted {filepath}")
+                    # Stop deleting if the total size is under the limit
+                    if total_size <= max_memory_bytes:
+                        break
+
+    @classmethod
+    def log(cls, message, **args):
+        cls.loggin.debug(message, **args)
+
+    @classmethod
+    def debug(cls, message, **args):
+        cls.loggin.debug(message, **args)
+
+    @classmethod
+    def info(cls, message, **args):
+        cls.loggin.info(message, **args)
+
+    @classmethod
+    def warning(cls, message, **args):
+        cls.loggin.warning(message, **args)
+
+    @classmethod
+    def error(cls, message, **args):
+        cls.loggin.error(message, **args)
+
+    @classmethod
+    def critical(cls, message, **args):
+        cls.loggin.critical(message, **args)
+
+
+
+class Config():
+
+    _config:configparser.ConfigParser
+
+    @classmethod
+    def __init__(cls, config_file:str) -> None:
+        cls.confi_file = absolute_path(config_file)
+
+        cls._config = configparser.ConfigParser()
+        cls._config.read(cls.confi_file)
+
+    @classmethod
+    def get(cls, section, option, fallback=None):
+        return cls._config.get(section, option, fallback=fallback)
+    
+    @classmethod
+    def getint(cls, section, option, fallback=None):
+        return cls._config.getint(section, option, fallback=fallback)
+    
+    @classmethod
+    def getfloat(cls, section, option, fallback=None):
+        return cls._config.getfloat(section, option, fallback=fallback)
+    
+    @classmethod
+    def getboolean(cls, section, option, fallback=None):
+        return cls._config.getboolean(section, option, fallback=fallback)
 
 def Get_UTC_time(TimeZone:datetime.timezone=datetime.timezone.utc, format:str="%Y-%m-%d %H:%M:%S"):
     # Obtenir l'heure actuelle au format UTC avec un objet timezone-aware

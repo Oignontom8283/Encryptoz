@@ -1,0 +1,6 @@
+[2024-06-12 00:37:10,714 - DEBUG] : Ceci est un message de débogage.
+[2024-06-12 00:37:10,714 - INFO] : Ceci est un message d'information.
+[2024-06-12 00:37:10,714 - WARNING] : Ceci est un message d'avertissement.
+[2024-06-12 00:37:10,715 - ERROR] : Ceci est un message d'erreur.
+[2024-06-12 00:37:10,715 - CRITICAL] : Ceci est un message critique.
+[2024-06-12 00:37:10,730 - DEBUG] : COUCOU
