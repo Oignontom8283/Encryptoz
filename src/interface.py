@@ -2,9 +2,8 @@ import os, json, sys
 from PyQt5.QtWidgets import QStatusBar, QMessageBox, QTextBrowser, QPlainTextEdit, QTabWidget,QLineEdit, QRadioButton, QDialog, QFileDialog, QLabel, QPushButton
 from PyQt5.uic import loadUiType, loadUi
 from PyQt5 import QtGui, QtCore
-from utility import __version__, Res, Intercafe_File, resource_path, hash_password, check_password, Set_LineInput_Password, create_db, connect_db, fetch_data_from_db, update_db
+from utility import __version__, Res, Intercafe_File, resource_path, hash_password, check_password, Set_LineInput_Password, create_db, connect_db, fetch_data_from_db, update_db, end
 from crypting import encrypt, decrypt
-import xml.etree.ElementTree as ET
 
 # Load global resources
 # App_Icon = resource_path('./resources/icon/icon.ico')
@@ -244,13 +243,4 @@ class KeyInput_UI(QDialog, Window_KeyInput[1], Window_KeyInput[0]):
         #self.close()
 
     def closeEvent(self, event):
-
-        # reply = QMessageBox.question(self, 'Confirmation', 'Êtes-vous sûr de vouloir fermer la fenêtre?',
-        #                              QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
-
-        # if reply == QMessageBox.Yes:
-        #     sys.exit()
-        # else:
-        #     event.ignore()  # Empêche la fermeture de la fenêtre
-
-        sys.exit()
+        end(1, "The user exited from the key request window.")

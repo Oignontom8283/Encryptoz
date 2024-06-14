@@ -242,6 +242,14 @@
         "documentation": {}
     },
     {
+        "label": "end",
+        "importPath": "utility",
+        "description": "utility",
+        "isExtraImport": true,
+        "detail": "utility",
+        "documentation": {}
+    },
+    {
         "label": "console",
         "importPath": "utility",
         "description": "utility",
@@ -259,6 +267,22 @@
     },
     {
         "label": "absolute_path",
+        "importPath": "utility",
+        "description": "utility",
+        "isExtraImport": true,
+        "detail": "utility",
+        "documentation": {}
+    },
+    {
+        "label": "LogginLevel",
+        "importPath": "utility",
+        "description": "utility",
+        "isExtraImport": true,
+        "detail": "utility",
+        "documentation": {}
+    },
+    {
+        "label": "end",
         "importPath": "utility",
         "description": "utility",
         "isExtraImport": true,
@@ -287,15 +311,6 @@
         "description": "crypting",
         "isExtraImport": true,
         "detail": "crypting",
-        "documentation": {}
-    },
-    {
-        "label": "xml.etree.ElementTree",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "xml.etree.ElementTree",
-        "description": "xml.etree.ElementTree",
-        "detail": "xml.etree.ElementTree",
         "documentation": {}
     },
     {
@@ -414,15 +429,6 @@
         "documentation": {}
     },
     {
-        "label": "DataBase_DATA",
-        "kind": 6,
-        "importPath": "src.utility",
-        "description": "src.utility",
-        "peekOfCode": "class DataBase_DATA():\n    def __init__(self, version, hint, hash, content) -> None:\n        self._data = {\n            \"version\": version,\n            \"hint\": hint,\n            \"hash\": hash,\n            \"content\": content\n        }\n    # version\n    @property",
-        "detail": "src.utility",
-        "documentation": {}
-    },
-    {
         "label": "Database",
         "kind": 6,
         "importPath": "src.utility",
@@ -432,11 +438,20 @@
         "documentation": {}
     },
     {
+        "label": "LogginLevel",
+        "kind": 6,
+        "importPath": "src.utility",
+        "description": "src.utility",
+        "peekOfCode": "class LogginLevel(Enum):\n    DEBUG = logging.DEBUG\n    INFO = logging.INFO\n    WARNING = logging.WARNING\n    ERROR = logging.ERROR\n    CRITICAL = logging.CRITICAL\nclass console():\n    __version__ = \"1.0.0\"\n    LogFile = None\n    loggin = None",
+        "detail": "src.utility",
+        "documentation": {}
+    },
+    {
         "label": "console",
         "kind": 6,
         "importPath": "src.utility",
         "description": "src.utility",
-        "peekOfCode": "class console():\n    __version__ = \"1.0.0\"\n    LogFile = None\n    loggin = None\n    @classmethod\n    def __init__(cls, LogsDirectory:str, LogFile:str=None) -> None:\n        cls.LogFile = absolute_path( f'{LogsDirectory}/{ cls.Get_UTC_time(format=\"%Y-%m-%d %H.%M.%S\") } (UTC).log' ) if LogFile is None else LogFile\n        DirPath = os.path.dirname(cls.LogFile)\n        os.makedirs(DirPath, exist_ok=True)\n        # Création d'un logger",
+        "peekOfCode": "class console():\n    __version__ = \"1.0.0\"\n    LogFile = None\n    loggin = None\n    @classmethod\n    def __init__(cls, \n            LogsDirectory:str, \n            LogDirectory_max_memory:str,\n            LogDirectory_max_age:str,\n            LogFile:str = None, ",
         "detail": "src.utility",
         "documentation": {}
     },
@@ -490,7 +505,7 @@
         "kind": 2,
         "importPath": "src.utility",
         "description": "src.utility",
-        "peekOfCode": "def check_password(password: str, hashed_password: str) -> bool:\n    try:\n        # Convertir les deux mots de passe en bytes\n        password_bytes = password.encode('utf-8')\n        hashed_password_bytes = hashed_password.encode('utf-8')\n        # Vérifier si le mot de passe correspond au hachage\n        return bcrypt.checkpw(password_bytes, hashed_password_bytes)\n    except:\n        return False\nclass DataBase_DATA():",
+        "peekOfCode": "def check_password(password: str, hashed_password: str) -> bool:\n    try:\n        # Convertir les deux mots de passe en bytes\n        password_bytes = password.encode('utf-8')\n        hashed_password_bytes = hashed_password.encode('utf-8')\n        # Vérifier si le mot de passe correspond au hachage\n        return bcrypt.checkpw(password_bytes, hashed_password_bytes)\n    except:\n        return False\nclass Database():",
         "detail": "src.utility",
         "documentation": {}
     },
@@ -517,7 +532,7 @@
         "kind": 2,
         "importPath": "src.utility",
         "description": "src.utility",
-        "peekOfCode": "def fetch_data_from_db(db:Database):\n    db.cursor.execute(\"SELECT version, hint, hash, content FROM eyz_data WHERE ROWID = 1\")\n    rows = db.cursor.fetchone()\n    return rows\n# Fonction pour modifier des données dans la base de données chiffrée\ndef update_db(db:Database, version, hint, hash, content):\n    db.cursor.execute(\"UPDATE eyz_data SET version = ?, hint = ?, hash = ?, content = ? WHERE ROWID = ?\", \n                      (version, hint, hash, content, \"1\"))\n    db.conn.commit()\nclass console():",
+        "peekOfCode": "def fetch_data_from_db(db:Database):\n    db.cursor.execute(\"SELECT version, hint, hash, content FROM eyz_data WHERE ROWID = 1\")\n    rows = db.cursor.fetchone()\n    return rows\n# Fonction pour modifier des données dans la base de données chiffrée\ndef update_db(db:Database, version, hint, hash, content):\n    db.cursor.execute(\"UPDATE eyz_data SET version = ?, hint = ?, hash = ?, content = ? WHERE ROWID = ?\", \n                      (version, hint, hash, content, \"1\"))\n    db.conn.commit()\nclass LogginLevel(Enum):",
         "detail": "src.utility",
         "documentation": {}
     },
@@ -526,7 +541,7 @@
         "kind": 2,
         "importPath": "src.utility",
         "description": "src.utility",
-        "peekOfCode": "def update_db(db:Database, version, hint, hash, content):\n    db.cursor.execute(\"UPDATE eyz_data SET version = ?, hint = ?, hash = ?, content = ? WHERE ROWID = ?\", \n                      (version, hint, hash, content, \"1\"))\n    db.conn.commit()\nclass console():\n    __version__ = \"1.0.0\"\n    LogFile = None\n    loggin = None\n    @classmethod\n    def __init__(cls, LogsDirectory:str, LogFile:str=None) -> None:",
+        "peekOfCode": "def update_db(db:Database, version, hint, hash, content):\n    db.cursor.execute(\"UPDATE eyz_data SET version = ?, hint = ?, hash = ?, content = ? WHERE ROWID = ?\", \n                      (version, hint, hash, content, \"1\"))\n    db.conn.commit()\nclass LogginLevel(Enum):\n    DEBUG = logging.DEBUG\n    INFO = logging.INFO\n    WARNING = logging.WARNING\n    ERROR = logging.ERROR\n    CRITICAL = logging.CRITICAL",
         "detail": "src.utility",
         "documentation": {}
     },
@@ -535,7 +550,7 @@
         "kind": 2,
         "importPath": "src.utility",
         "description": "src.utility",
-        "peekOfCode": "def end(ExitCode=None, reason=None):\n    sys.exit()",
+        "peekOfCode": "def end(ExitCode:int=None, reason:str=None):\n    console.info(\"End : %s\" % reason)\n    sys.exit(ExitCode)",
         "detail": "src.utility",
         "documentation": {}
     },

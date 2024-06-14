@@ -57,58 +57,6 @@ def check_password(password: str, hashed_password: str) -> bool:
         return False
 
 
-class DataBase_DATA():
-    def __init__(self, version, hint, hash, content) -> None:
-        self._data = {
-            "version": version,
-            "hint": hint,
-            "hash": hash,
-            "content": content
-        }
-
-    # version
-    @property
-    def version(self):
-        return self._data["version"]
-    
-    @version.setter
-    def version(self, new_value):
-        self._data["version"] = new_value
-
-    # --- hint
-    @property
-    def hint(self):
-        return self._data["hint"]
-    
-    @hint.setter
-    def hint(self, new_value):
-        self._data["hint"] = new_value
-
-    # --- hash
-    @property
-    def hash(self):
-        return self._data["hash"]
-    
-    @hash.setter
-    def hash(self, new_value):
-        self._data["hash"] = new_value
-
-    # --- hash
-    @property
-    def content(self):
-        return self._data["content"]
-    
-    @content.setter
-    def content(self, new_value):
-        self._data["content"] = new_value
-
-    def __str__(self) -> str:
-        return str(self._data)
-
-    def __repr__(self) -> str:
-        return self._data
-
-
 class Database():
     def __init__(self, db_path) -> None:
         self.conn = sqlite3.connect(db_path)
@@ -153,6 +101,14 @@ def update_db(db:Database, version, hint, hash, content):
 
     db.conn.commit()
 
+
+class LogginLevel(Enum):
+    DEBUG = logging.DEBUG
+    INFO = logging.INFO
+    WARNING = logging.WARNING
+    ERROR = logging.ERROR
+    CRITICAL = logging.CRITICAL
+
 class console():
 
     __version__ = "1.0.0"
@@ -161,9 +117,27 @@ class console():
     loggin = None
 
     @classmethod
-    def __init__(cls, LogsDirectory:str, LogFile:str=None) -> None:
-        
-        cls.LogFile = absolute_path( f'{LogsDirectory}/{ cls.Get_UTC_time(format="%Y-%m-%d %H.%M.%S") } (UTC).log' ) if LogFile is None else LogFile
+    def __init__(cls, 
+            LogsDirectory:str, 
+            LogDirectory_max_memory:str,
+            LogDirectory_max_age:str,
+            LogFile:str = None, 
+            Console_Log_Level:LogginLevel = LogginLevel.CRITICAL, 
+            File_Log_Level:LogginLevel = LogginLevel.INFO, 
+            Log_Formatter:str = '[%(asctime)s - %(levelname)s] : %(message)s'
+        ) -> None:
+        """
+        ## LogDirectory_max_memory
+        Exemple : `LogDirectory_max_memory = 10Ko`
+        Possibility : Use 'Ko', 'Mo', or 'Go'.
+
+        ## LogDirectory_max_age
+        Exemple : `LogDirectory_max_age = 10d`
+        Possibility : 's' for seconds, 'm' for minutes, 'h' for hours, or 'D' for days.
+        """
+
+        cls.LogDirectory = absolute_path( LogsDirectory if LogFile == None else os.path.dirname(LogFile) )
+        cls.LogFile = absolute_path( f'{LogsDirectory}/{ cls.Get_UTC_time(format="%Y-%m-%d %H.%M.%S") } (UTC).log' if LogFile == None else LogFile )
         
         DirPath = os.path.dirname(cls.LogFile)
         os.makedirs(DirPath, exist_ok=True)
@@ -174,14 +148,14 @@ class console():
 
         # Création d'un gestionnaire de fichier
         file_handler = logging.FileHandler(cls.LogFile, encoding="utf-8")
-        file_handler.setLevel(logging.DEBUG)
+        file_handler.setLevel(File_Log_Level.value)
 
         # Création d'un gestionnaire de flux (console)
         console_handler = logging.StreamHandler()
-        console_handler.setLevel(logging.WARNING)
+        console_handler.setLevel(Console_Log_Level.value)
 
         # Création d'un formateur et ajout au gestionnaire de fichier
-        formatter = logging.Formatter('[%(asctime)s - %(levelname)s] : %(message)s')
+        formatter = logging.Formatter(Log_Formatter)
         file_handler.setFormatter(formatter)
         console_handler.setFormatter(formatter)
 
@@ -189,15 +163,39 @@ class console():
         cls.loggin.addHandler(file_handler)
         cls.loggin.addHandler(console_handler)
 
-        # Utilisation du logger
+        # Nettoyage du dossier de log
 
-        # self.logger.debug("Ceci est un message de débogage.")
-        # self.logger.info("Ceci est un message d'information.")
-        # self.logger.warning("Ceci est un message d'avertissement.")
-        # self.logger.error("Ceci est un message d'erreur.")
-        # self.logger.critical("Ceci est un message critique.")
+        if LogFile is None: cls.delete_old_logs(cls.LogDirectory, LogDirectory_max_memory, LogDirectory_max_age)
 
+    @staticmethod
+    def _convert_memory(memory_str:str):
+        """Convert memory size from string to bytes."""
+        unit = memory_str.strip() [-2:] .lower()
+        size = int( memory_str[:-2] .strip() )
+        if unit == 'ko':
+            return size * 1024
+        elif unit == 'mo':
+            return size * 1024 * 1024
+        elif unit == 'go':
+            return size * 1024 * 1024 * 1024
+        else:
+            raise ValueError("Unsupported memory unit. Use 'Ko', 'Mo', or 'Go'.")
 
+    @staticmethod
+    def _convert_time(time_str:str):
+        """Convert time duration from string to seconds."""
+        unit = time_str.strip() [-1] .lower()
+        value = int( time_str[:-1] .strip() )
+        if unit == 's':
+            return datetime.timedelta(seconds=value)
+        elif unit == 'm':
+            return datetime.timedelta(minutes=value)
+        elif unit == 'h':
+            return datetime.timedelta(hours=value)
+        elif unit == 'd':
+            return datetime.timedelta(days=value)
+        else:
+            raise ValueError("Unsupported time unit. Use 's' for seconds, 'm' for minutes, 'h' for hours, or 'D' for days.")
 
     @classmethod
     def delete_old_logs(cls, directory, max_memory, max_age):
@@ -206,7 +204,7 @@ class console():
         # Convert max_age from string to timedelta
         max_age_timedelta = cls._convert_time(max_age)
         # Calculate the cutoff time
-        cutoff_time = datetime.now() - max_age_timedelta
+        cutoff_time = datetime.datetime.now() - max_age_timedelta
 
         total_size = 0
         log_files = []
@@ -217,7 +215,7 @@ class console():
                 filepath = os.path.join(directory, filename)
                 file_stats = os.stat(filepath)
                 file_size = file_stats.st_size
-                file_mtime = datetime.fromtimestamp(file_stats.st_mtime)
+                file_mtime = datetime.datetime.fromtimestamp(file_stats.st_mtime)
 
                 total_size += file_size
                 log_files.append((filepath, file_size, file_mtime))
@@ -301,5 +299,7 @@ class config():
         return cls._config.getboolean(section, option, fallback=fallback)
 
 
-def end(ExitCode=None, reason=None):
-    sys.exit()
+def end(ExitCode:int=None, reason:str=None):
+    console.info("End : %s" % reason)
+
+    sys.exit(ExitCode)
