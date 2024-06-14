@@ -1,6 +1,0 @@
-[2024-06-12 16:56:59,486 - DEBUG] : Ceci est un message de débogage.
-[2024-06-12 16:56:59,486 - INFO] : Ceci est un message d'information.
-[2024-06-12 16:56:59,486 - WARNING] : Ceci est un message d'avertissement.
-[2024-06-12 16:56:59,487 - ERROR] : Ceci est un message d'erreur.
-[2024-06-12 16:56:59,487 - CRITICAL] : Ceci est un message critique.
-[2024-06-12 16:56:59,502 - INFO] : salut

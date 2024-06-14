@@ -163,7 +163,7 @@ class console():
     @classmethod
     def __init__(cls, LogsDirectory:str, LogFile:str=None) -> None:
         
-        cls.LogFile = absolute_path( f'{LogsDirectory}/{ Get_UTC_time(format="%Y-%m-%d %H.%M.%S") } (UTC).log' ) if LogFile is None else LogFile
+        cls.LogFile = absolute_path( f'{LogsDirectory}/{ cls.Get_UTC_time(format="%Y-%m-%d %H.%M.%S") } (UTC).log' ) if LogFile is None else LogFile
         
         DirPath = os.path.dirname(cls.LogFile)
         os.makedirs(DirPath, exist_ok=True)
@@ -197,35 +197,7 @@ class console():
         # self.logger.error("Ceci est un message d'erreur.")
         # self.logger.critical("Ceci est un message critique.")
 
-    @classmethod
-    def _convert_memory(cls, memory_str:str):
-        """Convert memory size from string to bytes."""
-        unit = memory_str.strip() [-2:] .lower()
-        size = int( memory_str[:-2] .strip() )
-        if unit == 'ko':
-            return size * 1024
-        elif unit == 'mo':
-            return size * 1024 * 1024
-        elif unit == 'go':
-            return size * 1024 * 1024 * 1024
-        else:
-            raise ValueError("Unsupported memory unit. Use 'Ko', 'Mo', or 'Go'.")
 
-    @classmethod
-    def _convert_time(cls, time_str:str):
-        """Convert time duration from string to seconds."""
-        unit = time_str.strip() [-1] .lower()
-        value = int( time_str[:-1] .strip() )
-        if unit == 's':
-            return datetime.timedelta(seconds=value)
-        elif unit == 'm':
-            return datetime.timedelta(minutes=value)
-        elif unit == 'h':
-            return datetime.timedelta(hours=value)
-        elif unit == 'd':
-            return datetime.timedelta(days=value)
-        else:
-            raise ValueError("Unsupported time unit. Use 's' for seconds, 'm' for minutes, 'h' for hours, or 'D' for days.")
 
     @classmethod
     def delete_old_logs(cls, directory, max_memory, max_age):
@@ -264,33 +236,44 @@ class console():
                     if total_size <= max_memory_bytes:
                         break
 
-    @classmethod
-    def log(cls, message, **args):
-        cls.loggin.debug(message, **args)
+    @staticmethod
+    def Get_UTC_time(TimeZone:datetime.timezone=datetime.timezone.utc, format:str="%Y-%m-%d %H:%M:%S"):
+        # Obtenir l'heure actuelle au format UTC avec un objet timezone-aware
+        heure_utc = datetime.datetime.now(TimeZone)
+
+        return heure_utc.strftime(format)
+
+    @staticmethod
+    def _format_chain(*values: object, sep: str = " ", end: str = "") -> str:
+            return sep.join(values) + end
 
     @classmethod
-    def debug(cls, message, **args):
-        cls.loggin.debug(message, **args)
+    def log(cls, *msg:object, sep:str=" ", **args):
+        cls.loggin.debug(cls._format_chain(*msg, sep=sep), **args)
 
     @classmethod
-    def info(cls, message, **args):
-        cls.loggin.info(message, **args)
+    def debug(cls, *msg:object, sep:str=" ", **args):
+        cls.loggin.debug(cls._format_chain(*msg, sep=sep), **args)
 
     @classmethod
-    def warning(cls, message, **args):
-        cls.loggin.warning(message, **args)
+    def info(cls, *msg:object, sep:str=" ", **args):
+        cls.loggin.info(cls._format_chain(*msg, sep=sep), **args)
 
     @classmethod
-    def error(cls, message, **args):
-        cls.loggin.error(message, **args)
+    def warning(cls, *msg:object, sep:str=" ", **args):
+        cls.loggin.warning(cls._format_chain(*msg, sep=sep), **args)
 
     @classmethod
-    def critical(cls, message, **args):
-        cls.loggin.critical(message, **args)
+    def error(cls, *msg:object, sep:str=" ", **args):
+        cls.loggin.error(cls._format_chain(*msg, sep=sep), **args)
+
+    @classmethod
+    def critical(cls, *msg:object, sep:str=" ", **args):
+        cls.loggin.critical(cls._format_chain(*msg, sep=sep), **args)
 
 
 
-class Config():
+class config():
 
     _config:configparser.ConfigParser
 
@@ -317,8 +300,6 @@ class Config():
     def getboolean(cls, section, option, fallback=None):
         return cls._config.getboolean(section, option, fallback=fallback)
 
-def Get_UTC_time(TimeZone:datetime.timezone=datetime.timezone.utc, format:str="%Y-%m-%d %H:%M:%S"):
-    # Obtenir l'heure actuelle au format UTC avec un objet timezone-aware
-    heure_utc = datetime.datetime.now(TimeZone)
 
-    return heure_utc.strftime(format)
+def end(ExitCode=None, reason=None):
+    sys.exit()

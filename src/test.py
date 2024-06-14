@@ -1,6 +1,23 @@
+from utility import console
 
-from utility import Config
 
-h = Config("./.env")
+console.log()
 
-h["Log"]["directory"]
+console.debug()
+
+
+console.info()
+
+console.warning()
+
+console.error()
+
+console.critical()
+
+
+
+
+console.log()
+
+
+console

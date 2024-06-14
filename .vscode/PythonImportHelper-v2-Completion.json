@@ -1,0 +1,551 @@
+[
+    {
+        "label": "hashlib,",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "hashlib.",
+        "description": "hashlib.",
+        "detail": "hashlib.",
+        "documentation": {}
+    },
+    {
+        "label": "os,",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os.",
+        "description": "os.",
+        "detail": "os.",
+        "documentation": {}
+    },
+    {
+        "label": "QStatusBar",
+        "importPath": "PyQt5.QtWidgets",
+        "description": "PyQt5.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt5.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QMessageBox",
+        "importPath": "PyQt5.QtWidgets",
+        "description": "PyQt5.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt5.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QTextBrowser",
+        "importPath": "PyQt5.QtWidgets",
+        "description": "PyQt5.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt5.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QPlainTextEdit",
+        "importPath": "PyQt5.QtWidgets",
+        "description": "PyQt5.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt5.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QTabWidget",
+        "importPath": "PyQt5.QtWidgets",
+        "description": "PyQt5.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt5.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QLineEdit",
+        "importPath": "PyQt5.QtWidgets",
+        "description": "PyQt5.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt5.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QRadioButton",
+        "importPath": "PyQt5.QtWidgets",
+        "description": "PyQt5.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt5.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QDialog",
+        "importPath": "PyQt5.QtWidgets",
+        "description": "PyQt5.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt5.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QFileDialog",
+        "importPath": "PyQt5.QtWidgets",
+        "description": "PyQt5.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt5.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QLabel",
+        "importPath": "PyQt5.QtWidgets",
+        "description": "PyQt5.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt5.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QPushButton",
+        "importPath": "PyQt5.QtWidgets",
+        "description": "PyQt5.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt5.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QApplication",
+        "importPath": "PyQt5.QtWidgets",
+        "description": "PyQt5.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt5.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QLineEdit",
+        "importPath": "PyQt5.QtWidgets",
+        "description": "PyQt5.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt5.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "loadUiType",
+        "importPath": "PyQt5.uic",
+        "description": "PyQt5.uic",
+        "isExtraImport": true,
+        "detail": "PyQt5.uic",
+        "documentation": {}
+    },
+    {
+        "label": "loadUi",
+        "importPath": "PyQt5.uic",
+        "description": "PyQt5.uic",
+        "isExtraImport": true,
+        "detail": "PyQt5.uic",
+        "documentation": {}
+    },
+    {
+        "label": "QtGui",
+        "importPath": "PyQt5",
+        "description": "PyQt5",
+        "isExtraImport": true,
+        "detail": "PyQt5",
+        "documentation": {}
+    },
+    {
+        "label": "QtCore",
+        "importPath": "PyQt5",
+        "description": "PyQt5",
+        "isExtraImport": true,
+        "detail": "PyQt5",
+        "documentation": {}
+    },
+    {
+        "label": "__version__",
+        "importPath": "utility",
+        "description": "utility",
+        "isExtraImport": true,
+        "detail": "utility",
+        "documentation": {}
+    },
+    {
+        "label": "Res",
+        "importPath": "utility",
+        "description": "utility",
+        "isExtraImport": true,
+        "detail": "utility",
+        "documentation": {}
+    },
+    {
+        "label": "Intercafe_File",
+        "importPath": "utility",
+        "description": "utility",
+        "isExtraImport": true,
+        "detail": "utility",
+        "documentation": {}
+    },
+    {
+        "label": "resource_path",
+        "importPath": "utility",
+        "description": "utility",
+        "isExtraImport": true,
+        "detail": "utility",
+        "documentation": {}
+    },
+    {
+        "label": "hash_password",
+        "importPath": "utility",
+        "description": "utility",
+        "isExtraImport": true,
+        "detail": "utility",
+        "documentation": {}
+    },
+    {
+        "label": "check_password",
+        "importPath": "utility",
+        "description": "utility",
+        "isExtraImport": true,
+        "detail": "utility",
+        "documentation": {}
+    },
+    {
+        "label": "Set_LineInput_Password",
+        "importPath": "utility",
+        "description": "utility",
+        "isExtraImport": true,
+        "detail": "utility",
+        "documentation": {}
+    },
+    {
+        "label": "create_db",
+        "importPath": "utility",
+        "description": "utility",
+        "isExtraImport": true,
+        "detail": "utility",
+        "documentation": {}
+    },
+    {
+        "label": "connect_db",
+        "importPath": "utility",
+        "description": "utility",
+        "isExtraImport": true,
+        "detail": "utility",
+        "documentation": {}
+    },
+    {
+        "label": "fetch_data_from_db",
+        "importPath": "utility",
+        "description": "utility",
+        "isExtraImport": true,
+        "detail": "utility",
+        "documentation": {}
+    },
+    {
+        "label": "update_db",
+        "importPath": "utility",
+        "description": "utility",
+        "isExtraImport": true,
+        "detail": "utility",
+        "documentation": {}
+    },
+    {
+        "label": "console",
+        "importPath": "utility",
+        "description": "utility",
+        "isExtraImport": true,
+        "detail": "utility",
+        "documentation": {}
+    },
+    {
+        "label": "config",
+        "importPath": "utility",
+        "description": "utility",
+        "isExtraImport": true,
+        "detail": "utility",
+        "documentation": {}
+    },
+    {
+        "label": "absolute_path",
+        "importPath": "utility",
+        "description": "utility",
+        "isExtraImport": true,
+        "detail": "utility",
+        "documentation": {}
+    },
+    {
+        "label": "console",
+        "importPath": "utility",
+        "description": "utility",
+        "isExtraImport": true,
+        "detail": "utility",
+        "documentation": {}
+    },
+    {
+        "label": "encrypt",
+        "importPath": "crypting",
+        "description": "crypting",
+        "isExtraImport": true,
+        "detail": "crypting",
+        "documentation": {}
+    },
+    {
+        "label": "decrypt",
+        "importPath": "crypting",
+        "description": "crypting",
+        "isExtraImport": true,
+        "detail": "crypting",
+        "documentation": {}
+    },
+    {
+        "label": "xml.etree.ElementTree",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "xml.etree.ElementTree",
+        "description": "xml.etree.ElementTree",
+        "detail": "xml.etree.ElementTree",
+        "documentation": {}
+    },
+    {
+        "label": "sys,",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "sys.",
+        "description": "sys.",
+        "detail": "sys.",
+        "documentation": {}
+    },
+    {
+        "label": "Main_UI",
+        "importPath": "interface",
+        "description": "interface",
+        "isExtraImport": true,
+        "detail": "interface",
+        "documentation": {}
+    },
+    {
+        "label": "Enum",
+        "importPath": "enum",
+        "description": "enum",
+        "isExtraImport": true,
+        "detail": "enum",
+        "documentation": {}
+    },
+    {
+        "label": "generate_substitution_table",
+        "kind": 2,
+        "importPath": "src.crypting",
+        "description": "src.crypting",
+        "peekOfCode": "def generate_substitution_table(key):\n    # Crée une seed à partir de la clé pour assurer la reproductibilité\n    seed = int(hashlib.sha256(key.encode('utf-8')).hexdigest(), 16)\n    random.seed(seed)\n    # Alphabet et chiffres\n    characters = string.ascii_letters + string.digits\n    # Mélange les caractères pour créer la table de substitution\n    shuffled_characters = list(characters)\n    random.shuffle(shuffled_characters)\n    # Crée une table de substitution sous forme de dictionnaire",
+        "detail": "src.crypting",
+        "documentation": {}
+    },
+    {
+        "label": "add_random_padding",
+        "kind": 2,
+        "importPath": "src.crypting",
+        "description": "src.crypting",
+        "peekOfCode": "def add_random_padding(text, target_length):\n    # Ajoute des caractères aléatoires pour atteindre la longueur cible\n    if len(text) >= target_length:\n        return text\n    padding_length = target_length - len(text)\n    padding = ''.join(random.choices(string.ascii_letters + string.digits, k=padding_length))\n    return text + padding\ndef encrypt(text, key):\n    substitution_table = generate_substitution_table(key)\n    # Détermine une longueur cible aléatoire plus grande que le texte original",
+        "detail": "src.crypting",
+        "documentation": {}
+    },
+    {
+        "label": "encrypt",
+        "kind": 2,
+        "importPath": "src.crypting",
+        "description": "src.crypting",
+        "peekOfCode": "def encrypt(text, key):\n    substitution_table = generate_substitution_table(key)\n    # Détermine une longueur cible aléatoire plus grande que le texte original\n    target_length = len(text) + random.randint(5, 10)\n    # Ajoute des caractères aléatoires pour atteindre la longueur cible\n    padded_text = add_random_padding(text, target_length)\n    # Chiffre le texte en utilisant la table de substitution\n    encrypted_text = ''.join(substitution_table.get(char, char) for char in padded_text)\n    return encrypted_text\ndef decrypt(encrypted_text, key):",
+        "detail": "src.crypting",
+        "documentation": {}
+    },
+    {
+        "label": "decrypt",
+        "kind": 2,
+        "importPath": "src.crypting",
+        "description": "src.crypting",
+        "peekOfCode": "def decrypt(encrypted_text, key):\n    substitution_table = generate_substitution_table(key)\n    # Inverse la table de substitution pour le déchiffrement\n    inverse_substitution_table = {v: k for k, v in substitution_table.items()}\n    # Déchiffre le texte en utilisant la table de substitution inversée\n    decrypted_text = ''.join(inverse_substitution_table.get(char, char) for char in encrypted_text)\n    # Retire les caractères de padding (non présent dans l'original)\n    original_length = len(decrypted_text.rstrip(string.ascii_letters + string.digits))\n    decrypted_text = decrypted_text[:original_length]\n    return decrypted_text",
+        "detail": "src.crypting",
+        "documentation": {}
+    },
+    {
+        "label": "Main_UI",
+        "kind": 6,
+        "importPath": "src.interface",
+        "description": "src.interface",
+        "peekOfCode": "class Main_UI(Window_Main[1], Window_Main[0]):\n    def __init__(self, path) -> None:\n        super(Main_UI, self).__init__()\n        self.setupUi(self)\n        self.path = path\n        # Items list\n        self.Text_Display   :QTextBrowser\n        self.Text_Edit      :QPlainTextEdit\n        self.Tab            :QTabWidget\n        self.Save_Button    :QPushButton",
+        "detail": "src.interface",
+        "documentation": {}
+    },
+    {
+        "label": "KeyInput_UI",
+        "kind": 6,
+        "importPath": "src.interface",
+        "description": "src.interface",
+        "peekOfCode": "class KeyInput_UI(QDialog, Window_KeyInput[1], Window_KeyInput[0]):\n    def __init__(self, parent, hash:str, path:str) -> None:\n        super(KeyInput_UI, self).__init__(parent)\n        self.setupUi(self)\n        self.hash = hash\n        self.path = path\n        # Items list\n        self.Key_Input:QLineEdit\n        self.Key_Label:QLabel\n        self.Key_Radio:QRadioButton",
+        "detail": "src.interface",
+        "documentation": {}
+    },
+    {
+        "label": "Window_Main",
+        "kind": 5,
+        "importPath": "src.interface",
+        "description": "src.interface",
+        "peekOfCode": "Window_Main =  loadUiType(resource_path(Intercafe_File.main))\nWindow_KeyInput =  loadUiType(resource_path(Intercafe_File.key_input))\n# Builds interfaces\nclass Main_UI(Window_Main[1], Window_Main[0]):\n    def __init__(self, path) -> None:\n        super(Main_UI, self).__init__()\n        self.setupUi(self)\n        self.path = path\n        # Items list\n        self.Text_Display   :QTextBrowser",
+        "detail": "src.interface",
+        "documentation": {}
+    },
+    {
+        "label": "Window_KeyInput",
+        "kind": 5,
+        "importPath": "src.interface",
+        "description": "src.interface",
+        "peekOfCode": "Window_KeyInput =  loadUiType(resource_path(Intercafe_File.key_input))\n# Builds interfaces\nclass Main_UI(Window_Main[1], Window_Main[0]):\n    def __init__(self, path) -> None:\n        super(Main_UI, self).__init__()\n        self.setupUi(self)\n        self.path = path\n        # Items list\n        self.Text_Display   :QTextBrowser\n        self.Text_Edit      :QPlainTextEdit",
+        "detail": "src.interface",
+        "documentation": {}
+    },
+    {
+        "label": "Res",
+        "kind": 6,
+        "importPath": "src.utility",
+        "description": "src.utility",
+        "peekOfCode": "class Res(Enum):\n    SaveIcon = \"resources/save.png\"\nclass Intercafe_File(Enum):\n    main = \"interface/main.ui\"\n    key_input = \"interface/key_input.ui\"\ndef resource_path(ressource_path: Res):\n    \"\"\" Get absolute path to resource, works for dev and for PyInstaller \"\"\"\n    return absolute_path(ressource_path.value)\ndef absolute_path(relative_path:str):\n    \"\"\" Get absolute path to resource, works for dev and for PyInstaller \"\"\"",
+        "detail": "src.utility",
+        "documentation": {}
+    },
+    {
+        "label": "Intercafe_File",
+        "kind": 6,
+        "importPath": "src.utility",
+        "description": "src.utility",
+        "peekOfCode": "class Intercafe_File(Enum):\n    main = \"interface/main.ui\"\n    key_input = \"interface/key_input.ui\"\ndef resource_path(ressource_path: Res):\n    \"\"\" Get absolute path to resource, works for dev and for PyInstaller \"\"\"\n    return absolute_path(ressource_path.value)\ndef absolute_path(relative_path:str):\n    \"\"\" Get absolute path to resource, works for dev and for PyInstaller \"\"\"\n    try:\n        # PyInstaller creates a temp folder and stores path in _MEIPASS",
+        "detail": "src.utility",
+        "documentation": {}
+    },
+    {
+        "label": "DataBase_DATA",
+        "kind": 6,
+        "importPath": "src.utility",
+        "description": "src.utility",
+        "peekOfCode": "class DataBase_DATA():\n    def __init__(self, version, hint, hash, content) -> None:\n        self._data = {\n            \"version\": version,\n            \"hint\": hint,\n            \"hash\": hash,\n            \"content\": content\n        }\n    # version\n    @property",
+        "detail": "src.utility",
+        "documentation": {}
+    },
+    {
+        "label": "Database",
+        "kind": 6,
+        "importPath": "src.utility",
+        "description": "src.utility",
+        "peekOfCode": "class Database():\n    def __init__(self, db_path) -> None:\n        self.conn = sqlite3.connect(db_path)\n        self.cursor = self.conn.cursor()\n# Fonction pour créer une base de données chiffrée et insérer des données\ndef create_db(db_path) -> Database:\n    # Connexion à la base de données (elle sera créée si elle n'existe pas)\n    db = Database(db_path)\n    # Création de la table et insertion de données\n    db.cursor.execute('''CREATE TABLE eyz_data (",
+        "detail": "src.utility",
+        "documentation": {}
+    },
+    {
+        "label": "console",
+        "kind": 6,
+        "importPath": "src.utility",
+        "description": "src.utility",
+        "peekOfCode": "class console():\n    __version__ = \"1.0.0\"\n    LogFile = None\n    loggin = None\n    @classmethod\n    def __init__(cls, LogsDirectory:str, LogFile:str=None) -> None:\n        cls.LogFile = absolute_path( f'{LogsDirectory}/{ cls.Get_UTC_time(format=\"%Y-%m-%d %H.%M.%S\") } (UTC).log' ) if LogFile is None else LogFile\n        DirPath = os.path.dirname(cls.LogFile)\n        os.makedirs(DirPath, exist_ok=True)\n        # Création d'un logger",
+        "detail": "src.utility",
+        "documentation": {}
+    },
+    {
+        "label": "config",
+        "kind": 6,
+        "importPath": "src.utility",
+        "description": "src.utility",
+        "peekOfCode": "class config():\n    _config:configparser.ConfigParser\n    @classmethod\n    def __init__(cls, config_file:str) -> None:\n        cls.confi_file = absolute_path(config_file)\n        cls._config = configparser.ConfigParser()\n        cls._config.read(cls.confi_file)\n    @classmethod\n    def get(cls, section, option, fallback=None):\n        return cls._config.get(section, option, fallback=fallback)",
+        "detail": "src.utility",
+        "documentation": {}
+    },
+    {
+        "label": "resource_path",
+        "kind": 2,
+        "importPath": "src.utility",
+        "description": "src.utility",
+        "peekOfCode": "def resource_path(ressource_path: Res):\n    \"\"\" Get absolute path to resource, works for dev and for PyInstaller \"\"\"\n    return absolute_path(ressource_path.value)\ndef absolute_path(relative_path:str):\n    \"\"\" Get absolute path to resource, works for dev and for PyInstaller \"\"\"\n    try:\n        # PyInstaller creates a temp folder and stores path in _MEIPASS\n        base_path = sys._MEIPASS\n    except Exception:\n        base_path = os.path.abspath(os.path.dirname(__file__))",
+        "detail": "src.utility",
+        "documentation": {}
+    },
+    {
+        "label": "absolute_path",
+        "kind": 2,
+        "importPath": "src.utility",
+        "description": "src.utility",
+        "peekOfCode": "def absolute_path(relative_path:str):\n    \"\"\" Get absolute path to resource, works for dev and for PyInstaller \"\"\"\n    try:\n        # PyInstaller creates a temp folder and stores path in _MEIPASS\n        base_path = sys._MEIPASS\n    except Exception:\n        base_path = os.path.abspath(os.path.dirname(__file__))\n    return os.path.join(base_path, relative_path)\ndef Set_LineInput_Password(object:QLineEdit, state:bool):\n    \"\"\"",
+        "detail": "src.utility",
+        "documentation": {}
+    },
+    {
+        "label": "Set_LineInput_Password",
+        "kind": 2,
+        "importPath": "src.utility",
+        "description": "src.utility",
+        "peekOfCode": "def Set_LineInput_Password(object:QLineEdit, state:bool):\n    \"\"\"\n    If @staet is True put the QlineEdit in Password mode otherwise put it in Normal mods\n    \"\"\"\n    object.setEchoMode(QLineEdit.Password if state else QLineEdit.Normal)\ndef hash_password(password: str) -> str:\n    # Convertir le mot de passe en bytes\n    password_bytes = password.encode('utf-8')\n    # Générer un salt et hacher le mot de passe\n    salt = bcrypt.gensalt()",
+        "detail": "src.utility",
+        "documentation": {}
+    },
+    {
+        "label": "hash_password",
+        "kind": 2,
+        "importPath": "src.utility",
+        "description": "src.utility",
+        "peekOfCode": "def hash_password(password: str) -> str:\n    # Convertir le mot de passe en bytes\n    password_bytes = password.encode('utf-8')\n    # Générer un salt et hacher le mot de passe\n    salt = bcrypt.gensalt()\n    hashed_password = bcrypt.hashpw(password_bytes, salt)\n    # Retourner le mot de passe haché sous forme de chaîne de caractères\n    return hashed_password.decode('utf-8')\n# Fonction pour vérifier un mot de passe haché\ndef check_password(password: str, hashed_password: str) -> bool:",
+        "detail": "src.utility",
+        "documentation": {}
+    },
+    {
+        "label": "check_password",
+        "kind": 2,
+        "importPath": "src.utility",
+        "description": "src.utility",
+        "peekOfCode": "def check_password(password: str, hashed_password: str) -> bool:\n    try:\n        # Convertir les deux mots de passe en bytes\n        password_bytes = password.encode('utf-8')\n        hashed_password_bytes = hashed_password.encode('utf-8')\n        # Vérifier si le mot de passe correspond au hachage\n        return bcrypt.checkpw(password_bytes, hashed_password_bytes)\n    except:\n        return False\nclass DataBase_DATA():",
+        "detail": "src.utility",
+        "documentation": {}
+    },
+    {
+        "label": "create_db",
+        "kind": 2,
+        "importPath": "src.utility",
+        "description": "src.utility",
+        "peekOfCode": "def create_db(db_path) -> Database:\n    # Connexion à la base de données (elle sera créée si elle n'existe pas)\n    db = Database(db_path)\n    # Création de la table et insertion de données\n    db.cursor.execute('''CREATE TABLE eyz_data (\n                        version TEXT,\n                        hint TEXT,\n                        hash TEXT,\n                        content TEXT)''')\n    db.cursor.execute(\"INSERT INTO eyz_data (version, hint, hash, content) VALUES (?, ?, ?, ?)\", ",
+        "detail": "src.utility",
+        "documentation": {}
+    },
+    {
+        "label": "connect_db",
+        "kind": 2,
+        "importPath": "src.utility",
+        "description": "src.utility",
+        "peekOfCode": "def connect_db(db_path) -> Database:\n    return Database(db_path)\n# Fonction pour récupérer des données de la base de données chiffrée\ndef fetch_data_from_db(db:Database):\n    db.cursor.execute(\"SELECT version, hint, hash, content FROM eyz_data WHERE ROWID = 1\")\n    rows = db.cursor.fetchone()\n    return rows\n# Fonction pour modifier des données dans la base de données chiffrée\ndef update_db(db:Database, version, hint, hash, content):\n    db.cursor.execute(\"UPDATE eyz_data SET version = ?, hint = ?, hash = ?, content = ? WHERE ROWID = ?\", ",
+        "detail": "src.utility",
+        "documentation": {}
+    },
+    {
+        "label": "fetch_data_from_db",
+        "kind": 2,
+        "importPath": "src.utility",
+        "description": "src.utility",
+        "peekOfCode": "def fetch_data_from_db(db:Database):\n    db.cursor.execute(\"SELECT version, hint, hash, content FROM eyz_data WHERE ROWID = 1\")\n    rows = db.cursor.fetchone()\n    return rows\n# Fonction pour modifier des données dans la base de données chiffrée\ndef update_db(db:Database, version, hint, hash, content):\n    db.cursor.execute(\"UPDATE eyz_data SET version = ?, hint = ?, hash = ?, content = ? WHERE ROWID = ?\", \n                      (version, hint, hash, content, \"1\"))\n    db.conn.commit()\nclass console():",
+        "detail": "src.utility",
+        "documentation": {}
+    },
+    {
+        "label": "update_db",
+        "kind": 2,
+        "importPath": "src.utility",
+        "description": "src.utility",
+        "peekOfCode": "def update_db(db:Database, version, hint, hash, content):\n    db.cursor.execute(\"UPDATE eyz_data SET version = ?, hint = ?, hash = ?, content = ? WHERE ROWID = ?\", \n                      (version, hint, hash, content, \"1\"))\n    db.conn.commit()\nclass console():\n    __version__ = \"1.0.0\"\n    LogFile = None\n    loggin = None\n    @classmethod\n    def __init__(cls, LogsDirectory:str, LogFile:str=None) -> None:",
+        "detail": "src.utility",
+        "documentation": {}
+    },
+    {
+        "label": "end",
+        "kind": 2,
+        "importPath": "src.utility",
+        "description": "src.utility",
+        "peekOfCode": "def end(ExitCode=None, reason=None):\n    sys.exit()",
+        "detail": "src.utility",
+        "documentation": {}
+    },
+    {
+        "label": "__version__",
+        "kind": 5,
+        "importPath": "src.utility",
+        "description": "src.utility",
+        "peekOfCode": "__version__ = \"1.0.0\"\nclass Res(Enum):\n    SaveIcon = \"resources/save.png\"\nclass Intercafe_File(Enum):\n    main = \"interface/main.ui\"\n    key_input = \"interface/key_input.ui\"\ndef resource_path(ressource_path: Res):\n    \"\"\" Get absolute path to resource, works for dev and for PyInstaller \"\"\"\n    return absolute_path(ressource_path.value)\ndef absolute_path(relative_path:str):",
+        "detail": "src.utility",
+        "documentation": {}
+    }
+]

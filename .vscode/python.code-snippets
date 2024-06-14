@@ -1,0 +1,50 @@
+{
+    "Log": {
+        "prefix": "log",
+        "body": [
+            "console.log($1)",
+            "$0"
+        ],
+        "description": ""
+    },
+    "debug": {
+        "prefix": "debug",
+        "body": [
+            "console.debug($1)",
+            "$0"
+        ],
+        "description": ""
+    },
+    "info": {
+        "prefix": "info",
+        "body": [
+            "console.info($1)",
+            "$0"
+        ],
+        "description": ""
+    },
+    "warning": {
+        "prefix": "warning",
+        "body": [
+            "console.warning($1)",
+            "$0"
+        ],
+        "description": ""
+    },
+    "error": {
+        "prefix": "error",
+        "body": [
+            "console.error($1)",
+            "$0"
+        ],
+        "description": ""
+    },
+    "critical": {
+        "prefix": "critical",
+        "body": [
+            "console.critical($1)",
+            "$0"
+        ],
+        "description": ""
+    }
+}
