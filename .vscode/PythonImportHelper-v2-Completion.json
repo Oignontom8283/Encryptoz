@@ -122,6 +122,22 @@
         "documentation": {}
     },
     {
+        "label": "QWidget",
+        "importPath": "PyQt5.QtWidgets",
+        "description": "PyQt5.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt5.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QMessageBox",
+        "importPath": "PyQt5.QtWidgets",
+        "description": "PyQt5.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt5.QtWidgets",
+        "documentation": {}
+    },
+    {
         "label": "loadUiType",
         "importPath": "PyQt5.uic",
         "description": "PyQt5.uic",
@@ -154,95 +170,15 @@
         "documentation": {}
     },
     {
+        "label": "*",
+        "importPath": "utility",
+        "description": "utility",
+        "isExtraImport": true,
+        "detail": "utility",
+        "documentation": {}
+    },
+    {
         "label": "__version__",
-        "importPath": "utility",
-        "description": "utility",
-        "isExtraImport": true,
-        "detail": "utility",
-        "documentation": {}
-    },
-    {
-        "label": "Res",
-        "importPath": "utility",
-        "description": "utility",
-        "isExtraImport": true,
-        "detail": "utility",
-        "documentation": {}
-    },
-    {
-        "label": "Intercafe_File",
-        "importPath": "utility",
-        "description": "utility",
-        "isExtraImport": true,
-        "detail": "utility",
-        "documentation": {}
-    },
-    {
-        "label": "resource_path",
-        "importPath": "utility",
-        "description": "utility",
-        "isExtraImport": true,
-        "detail": "utility",
-        "documentation": {}
-    },
-    {
-        "label": "hash_password",
-        "importPath": "utility",
-        "description": "utility",
-        "isExtraImport": true,
-        "detail": "utility",
-        "documentation": {}
-    },
-    {
-        "label": "check_password",
-        "importPath": "utility",
-        "description": "utility",
-        "isExtraImport": true,
-        "detail": "utility",
-        "documentation": {}
-    },
-    {
-        "label": "Set_LineInput_Password",
-        "importPath": "utility",
-        "description": "utility",
-        "isExtraImport": true,
-        "detail": "utility",
-        "documentation": {}
-    },
-    {
-        "label": "create_db",
-        "importPath": "utility",
-        "description": "utility",
-        "isExtraImport": true,
-        "detail": "utility",
-        "documentation": {}
-    },
-    {
-        "label": "connect_db",
-        "importPath": "utility",
-        "description": "utility",
-        "isExtraImport": true,
-        "detail": "utility",
-        "documentation": {}
-    },
-    {
-        "label": "fetch_data_from_db",
-        "importPath": "utility",
-        "description": "utility",
-        "isExtraImport": true,
-        "detail": "utility",
-        "documentation": {}
-    },
-    {
-        "label": "update_db",
-        "importPath": "utility",
-        "description": "utility",
-        "isExtraImport": true,
-        "detail": "utility",
-        "documentation": {}
-    },
-    {
-        "label": "end",
         "importPath": "utility",
         "description": "utility",
         "isExtraImport": true,
@@ -274,23 +210,7 @@
         "documentation": {}
     },
     {
-        "label": "LogginLevel",
-        "importPath": "utility",
-        "description": "utility",
-        "isExtraImport": true,
-        "detail": "utility",
-        "documentation": {}
-    },
-    {
         "label": "end",
-        "importPath": "utility",
-        "description": "utility",
-        "isExtraImport": true,
-        "detail": "utility",
-        "documentation": {}
-    },
-    {
-        "label": "console",
         "importPath": "utility",
         "description": "utility",
         "isExtraImport": true,
@@ -379,7 +299,7 @@
         "kind": 6,
         "importPath": "src.interface",
         "description": "src.interface",
-        "peekOfCode": "class Main_UI(Window_Main[1], Window_Main[0]):\n    def __init__(self, path) -> None:\n        super(Main_UI, self).__init__()\n        self.setupUi(self)\n        self.path = path\n        # Items list\n        self.Text_Display   :QTextBrowser\n        self.Text_Edit      :QPlainTextEdit\n        self.Tab            :QTabWidget\n        self.Save_Button    :QPushButton",
+        "peekOfCode": "class Main_UI(Window_Main[1], Window_Main[0]):\n    def __init__(self, path) -> None:\n        console.info(\"Loading interface %r\" % self.__class__.__qualname__)\n        super(Main_UI, self).__init__()\n        self.setupUi(self)\n        self.path = path\n        # Items list\n        self.Text_Display   :QTextBrowser\n        self.Text_Edit      :QPlainTextEdit\n        self.Tab            :QTabWidget",
         "detail": "src.interface",
         "documentation": {}
     },
@@ -388,7 +308,7 @@
         "kind": 6,
         "importPath": "src.interface",
         "description": "src.interface",
-        "peekOfCode": "class KeyInput_UI(QDialog, Window_KeyInput[1], Window_KeyInput[0]):\n    def __init__(self, parent, hash:str, path:str) -> None:\n        super(KeyInput_UI, self).__init__(parent)\n        self.setupUi(self)\n        self.hash = hash\n        self.path = path\n        # Items list\n        self.Key_Input:QLineEdit\n        self.Key_Label:QLabel\n        self.Key_Radio:QRadioButton",
+        "peekOfCode": "class KeyInput_UI(QDialog, Window_KeyInput[1], Window_KeyInput[0]):\n    def __init__(self, parent, hash:str, path:str) -> None:\n        console.info(\"Loading interface %r\" % self.__class__.__qualname__)\n        super(KeyInput_UI, self).__init__(parent)\n        self.setupUi(self)\n        self.hash = hash\n        self.path = path\n        # Items list\n        self.Key_Input:QLineEdit\n        self.Key_Label:QLabel",
         "detail": "src.interface",
         "documentation": {}
     },
@@ -397,7 +317,7 @@
         "kind": 5,
         "importPath": "src.interface",
         "description": "src.interface",
-        "peekOfCode": "Window_Main =  loadUiType(resource_path(Intercafe_File.main))\nWindow_KeyInput =  loadUiType(resource_path(Intercafe_File.key_input))\n# Builds interfaces\nclass Main_UI(Window_Main[1], Window_Main[0]):\n    def __init__(self, path) -> None:\n        super(Main_UI, self).__init__()\n        self.setupUi(self)\n        self.path = path\n        # Items list\n        self.Text_Display   :QTextBrowser",
+        "peekOfCode": "Window_Main =  loadUiType(resource_path(Intercafe_File.main))\nWindow_KeyInput =  loadUiType(resource_path(Intercafe_File.key_input))\n# Builds interfaces\nclass Main_UI(Window_Main[1], Window_Main[0]):\n    def __init__(self, path) -> None:\n        console.info(\"Loading interface %r\" % self.__class__.__qualname__)\n        super(Main_UI, self).__init__()\n        self.setupUi(self)\n        self.path = path\n        # Items list",
         "detail": "src.interface",
         "documentation": {}
     },
@@ -406,7 +326,7 @@
         "kind": 5,
         "importPath": "src.interface",
         "description": "src.interface",
-        "peekOfCode": "Window_KeyInput =  loadUiType(resource_path(Intercafe_File.key_input))\n# Builds interfaces\nclass Main_UI(Window_Main[1], Window_Main[0]):\n    def __init__(self, path) -> None:\n        super(Main_UI, self).__init__()\n        self.setupUi(self)\n        self.path = path\n        # Items list\n        self.Text_Display   :QTextBrowser\n        self.Text_Edit      :QPlainTextEdit",
+        "peekOfCode": "Window_KeyInput =  loadUiType(resource_path(Intercafe_File.key_input))\n# Builds interfaces\nclass Main_UI(Window_Main[1], Window_Main[0]):\n    def __init__(self, path) -> None:\n        console.info(\"Loading interface %r\" % self.__class__.__qualname__)\n        super(Main_UI, self).__init__()\n        self.setupUi(self)\n        self.path = path\n        # Items list\n        self.Text_Display   :QTextBrowser",
         "detail": "src.interface",
         "documentation": {}
     },
@@ -434,15 +354,6 @@
         "importPath": "src.utility",
         "description": "src.utility",
         "peekOfCode": "class Database():\n    def __init__(self, db_path) -> None:\n        self.conn = sqlite3.connect(db_path)\n        self.cursor = self.conn.cursor()\n# Fonction pour créer une base de données chiffrée et insérer des données\ndef create_db(db_path) -> Database:\n    # Connexion à la base de données (elle sera créée si elle n'existe pas)\n    db = Database(db_path)\n    # Création de la table et insertion de données\n    db.cursor.execute('''CREATE TABLE eyz_data (",
-        "detail": "src.utility",
-        "documentation": {}
-    },
-    {
-        "label": "LogginLevel",
-        "kind": 6,
-        "importPath": "src.utility",
-        "description": "src.utility",
-        "peekOfCode": "class LogginLevel(Enum):\n    DEBUG = logging.DEBUG\n    INFO = logging.INFO\n    WARNING = logging.WARNING\n    ERROR = logging.ERROR\n    CRITICAL = logging.CRITICAL\nclass console():\n    __version__ = \"1.0.0\"\n    LogFile = None\n    loggin = None",
         "detail": "src.utility",
         "documentation": {}
     },
@@ -532,7 +443,7 @@
         "kind": 2,
         "importPath": "src.utility",
         "description": "src.utility",
-        "peekOfCode": "def fetch_data_from_db(db:Database):\n    db.cursor.execute(\"SELECT version, hint, hash, content FROM eyz_data WHERE ROWID = 1\")\n    rows = db.cursor.fetchone()\n    return rows\n# Fonction pour modifier des données dans la base de données chiffrée\ndef update_db(db:Database, version, hint, hash, content):\n    db.cursor.execute(\"UPDATE eyz_data SET version = ?, hint = ?, hash = ?, content = ? WHERE ROWID = ?\", \n                      (version, hint, hash, content, \"1\"))\n    db.conn.commit()\nclass LogginLevel(Enum):",
+        "peekOfCode": "def fetch_data_from_db(db:Database):\n    db.cursor.execute(\"SELECT version, hint, hash, content FROM eyz_data WHERE ROWID = 1\")\n    rows = db.cursor.fetchone()\n    return rows\n# Fonction pour modifier des données dans la base de données chiffrée\ndef update_db(db:Database, version, hint, hash, content):\n    db.cursor.execute(\"UPDATE eyz_data SET version = ?, hint = ?, hash = ?, content = ? WHERE ROWID = ?\", \n                      (version, hint, hash, content, \"1\"))\n    db.conn.commit()\nclass console():",
         "detail": "src.utility",
         "documentation": {}
     },
@@ -541,7 +452,7 @@
         "kind": 2,
         "importPath": "src.utility",
         "description": "src.utility",
-        "peekOfCode": "def update_db(db:Database, version, hint, hash, content):\n    db.cursor.execute(\"UPDATE eyz_data SET version = ?, hint = ?, hash = ?, content = ? WHERE ROWID = ?\", \n                      (version, hint, hash, content, \"1\"))\n    db.conn.commit()\nclass LogginLevel(Enum):\n    DEBUG = logging.DEBUG\n    INFO = logging.INFO\n    WARNING = logging.WARNING\n    ERROR = logging.ERROR\n    CRITICAL = logging.CRITICAL",
+        "peekOfCode": "def update_db(db:Database, version, hint, hash, content):\n    db.cursor.execute(\"UPDATE eyz_data SET version = ?, hint = ?, hash = ?, content = ? WHERE ROWID = ?\", \n                      (version, hint, hash, content, \"1\"))\n    db.conn.commit()\nclass console():\n    __version__ = \"1.0.0\"\n    LogFile = None\n    loggin = None\n    @classmethod\n    def __init__(cls, ",
         "detail": "src.utility",
         "documentation": {}
     },
@@ -550,7 +461,25 @@
         "kind": 2,
         "importPath": "src.utility",
         "description": "src.utility",
-        "peekOfCode": "def end(ExitCode:int=None, reason:str=None):\n    console.info(\"End : %s\" % reason)\n    sys.exit(ExitCode)",
+        "peekOfCode": "def end(ExitCode:int=None, reason:str=None):\n    console.info(\"End => %s\" % reason)\n    sys.exit(ExitCode)\ndef Critical_Error_Popu(parent:QWidget, message:str, error:any=None):\n    console.critical(message, \"=>\", error)\n    QMessageBox.critical(parent, \"CRITICAL ERROR\", message + f'\\n\\nERROR : {str(error)}' if error != None else \"\")\n    end(reason='A critical error occurred !')\ndef Error_popu(parent:QWidget, message:str, error:any=None):\n    console.error(message, \"=>\", str(error))\n    QMessageBox.critical(parent, \"ERROR\", message + f'\\n\\n : {str(error)}' if error != None else \"\")",
+        "detail": "src.utility",
+        "documentation": {}
+    },
+    {
+        "label": "Critical_Error_Popu",
+        "kind": 2,
+        "importPath": "src.utility",
+        "description": "src.utility",
+        "peekOfCode": "def Critical_Error_Popu(parent:QWidget, message:str, error:any=None):\n    console.critical(message, \"=>\", error)\n    QMessageBox.critical(parent, \"CRITICAL ERROR\", message + f'\\n\\nERROR : {str(error)}' if error != None else \"\")\n    end(reason='A critical error occurred !')\ndef Error_popu(parent:QWidget, message:str, error:any=None):\n    console.error(message, \"=>\", str(error))\n    QMessageBox.critical(parent, \"ERROR\", message + f'\\n\\n : {str(error)}' if error != None else \"\")",
+        "detail": "src.utility",
+        "documentation": {}
+    },
+    {
+        "label": "Error_popu",
+        "kind": 2,
+        "importPath": "src.utility",
+        "description": "src.utility",
+        "peekOfCode": "def Error_popu(parent:QWidget, message:str, error:any=None):\n    console.error(message, \"=>\", str(error))\n    QMessageBox.critical(parent, \"ERROR\", message + f'\\n\\n : {str(error)}' if error != None else \"\")",
         "detail": "src.utility",
         "documentation": {}
     },

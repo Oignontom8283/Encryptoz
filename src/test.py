@@ -1,23 +1,5 @@
-from utility import console
 
 
-console.log()
+g= 47
 
-console.debug()
-
-
-console.info()
-
-console.warning()
-
-console.error()
-
-console.critical()
-
-
-
-
-console.log()
-
-
-console
+print("truc : %s" % g)

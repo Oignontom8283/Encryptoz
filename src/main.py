@@ -1,7 +1,7 @@
 import sys, argparse, configparser
 from interface import Main_UI
 from PyQt5.QtWidgets import QApplication
-from utility import console, config, absolute_path, LogginLevel, end
+from utility import console, config, absolute_path, end
 
 if __name__ == "__main__":
     app = QApplication([])
@@ -21,7 +21,7 @@ if __name__ == "__main__":
 
     # LOAD CONFIG
 
-    config(absolute_path("./.env"))
+    config(absolute_path("./.config"))
 
 
     # INIT LOG SYSTEM
@@ -30,8 +30,8 @@ if __name__ == "__main__":
         LogsDirectory = config.get("Log", "directory"),
         LogDirectory_max_memory = config.get("Log", "max_memory"),
         LogDirectory_max_age = config.get("Log", "max_age"),
-        Console_Log_Level = LogginLevel.CRITICAL if debug_mode == False else LogginLevel.DEBUG,
-        File_Log_Level = LogginLevel.INFO if debug_mode == False else LogginLevel.DEBUG
+        Console_Log_Level = console.Level.CRITICAL if debug_mode == False else console.Level.DEBUG,
+        File_Log_Level = console.Level.INFO if debug_mode == False else console.Level.DEBUG
     )
 
 

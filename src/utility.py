@@ -1,6 +1,6 @@
 import sys, os, bcrypt, sqlite3, datetime, logging, datetime, configparser
 from enum import Enum
-from PyQt5.QtWidgets import QLineEdit
+from PyQt5.QtWidgets import QLineEdit, QWidget, QMessageBox
 
 __version__ = "1.0.0"
 
@@ -101,14 +101,6 @@ def update_db(db:Database, version, hint, hash, content):
 
     db.conn.commit()
 
-
-class LogginLevel(Enum):
-    DEBUG = logging.DEBUG
-    INFO = logging.INFO
-    WARNING = logging.WARNING
-    ERROR = logging.ERROR
-    CRITICAL = logging.CRITICAL
-
 class console():
 
     __version__ = "1.0.0"
@@ -122,8 +114,8 @@ class console():
             LogDirectory_max_memory:str,
             LogDirectory_max_age:str,
             LogFile:str = None, 
-            Console_Log_Level:LogginLevel = LogginLevel.CRITICAL, 
-            File_Log_Level:LogginLevel = LogginLevel.INFO, 
+            Console_Log_Level:'console.Level' = ..., 
+            File_Log_Level:'console.Level' = ..., 
             Log_Formatter:str = '[%(asctime)s - %(levelname)s] : %(message)s'
         ) -> None:
         """
@@ -166,6 +158,13 @@ class console():
         # Nettoyage du dossier de log
 
         if LogFile is None: cls.delete_old_logs(cls.LogDirectory, LogDirectory_max_memory, LogDirectory_max_age)
+
+    class Level(Enum):
+        DEBUG = logging.DEBUG
+        INFO = logging.INFO
+        WARNING = logging.WARNING
+        ERROR = logging.ERROR
+        CRITICAL = logging.CRITICAL
 
     @staticmethod
     def _convert_memory(memory_str:str):
@@ -240,10 +239,11 @@ class console():
         heure_utc = datetime.datetime.now(TimeZone)
 
         return heure_utc.strftime(format)
+        
 
     @staticmethod
     def _format_chain(*values: object, sep: str = " ", end: str = "") -> str:
-            return sep.join(values) + end
+            return sep.join([str(item) for item in values]) + end
 
     @classmethod
     def log(cls, *msg:object, sep:str=" ", **args):
@@ -300,6 +300,15 @@ class config():
 
 
 def end(ExitCode:int=None, reason:str=None):
-    console.info("End : %s" % reason)
+    console.info("End => %s" % reason)
 
     sys.exit(ExitCode)
+
+def Critical_Error_Popu(parent:QWidget, message:str, error:any=None):
+    console.critical(message, "=>", error)
+    QMessageBox.critical(parent, "CRITICAL ERROR", message + f'\n\nERROR : {str(error)}' if error != None else "")
+    end(reason='A critical error occurred !')
+
+def Error_popu(parent:QWidget, message:str, error:any=None):
+    console.error(message, "=>", str(error))
+    QMessageBox.critical(parent, "ERROR", message + f'\n\n : {str(error)}' if error != None else "")
