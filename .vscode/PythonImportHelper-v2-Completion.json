@@ -122,6 +122,22 @@
         "documentation": {}
     },
     {
+        "label": "QWidget",
+        "importPath": "PyQt5.QtWidgets",
+        "description": "PyQt5.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt5.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QMessageBox",
+        "importPath": "PyQt5.QtWidgets",
+        "description": "PyQt5.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt5.QtWidgets",
+        "documentation": {}
+    },
+    {
         "label": "loadUiType",
         "importPath": "PyQt5.uic",
         "description": "PyQt5.uic",
@@ -154,6 +170,14 @@
         "documentation": {}
     },
     {
+        "label": "*",
+        "importPath": "utility",
+        "description": "utility",
+        "isExtraImport": true,
+        "detail": "utility",
+        "documentation": {}
+    },
+    {
         "label": "__version__",
         "importPath": "utility",
         "description": "utility",
@@ -162,7 +186,7 @@
         "documentation": {}
     },
     {
-        "label": "Res",
+        "label": "console",
         "importPath": "utility",
         "description": "utility",
         "isExtraImport": true,
@@ -170,7 +194,7 @@
         "documentation": {}
     },
     {
-        "label": "Intercafe_File",
+        "label": "config",
         "importPath": "utility",
         "description": "utility",
         "isExtraImport": true,
@@ -178,7 +202,7 @@
         "documentation": {}
     },
     {
-        "label": "resource_path",
+        "label": "absolute_path",
         "importPath": "utility",
         "description": "utility",
         "isExtraImport": true,
@@ -186,55 +210,7 @@
         "documentation": {}
     },
     {
-        "label": "hash_password",
-        "importPath": "utility",
-        "description": "utility",
-        "isExtraImport": true,
-        "detail": "utility",
-        "documentation": {}
-    },
-    {
-        "label": "check_password",
-        "importPath": "utility",
-        "description": "utility",
-        "isExtraImport": true,
-        "detail": "utility",
-        "documentation": {}
-    },
-    {
-        "label": "Set_LineInput_Password",
-        "importPath": "utility",
-        "description": "utility",
-        "isExtraImport": true,
-        "detail": "utility",
-        "documentation": {}
-    },
-    {
-        "label": "create_db",
-        "importPath": "utility",
-        "description": "utility",
-        "isExtraImport": true,
-        "detail": "utility",
-        "documentation": {}
-    },
-    {
-        "label": "connect_db",
-        "importPath": "utility",
-        "description": "utility",
-        "isExtraImport": true,
-        "detail": "utility",
-        "documentation": {}
-    },
-    {
-        "label": "fetch_data_from_db",
-        "importPath": "utility",
-        "description": "utility",
-        "isExtraImport": true,
-        "detail": "utility",
-        "documentation": {}
-    },
-    {
-        "label": "update_db",
+        "label": "end",
         "importPath": "utility",
         "description": "utility",
         "isExtraImport": true,
@@ -258,29 +234,12 @@
         "documentation": {}
     },
     {
-        "label": "decrypt",
-        "importPath": "crypting",
-        "description": "crypting",
-        "isExtraImport": true,
-        "detail": "crypting",
-        "documentation": {}
-    },
-    {
-        "label": "xml.etree.ElementTree",
+        "label": "sys,",
         "kind": 6,
         "isExtraImport": true,
-        "importPath": "xml.etree.ElementTree",
-        "description": "xml.etree.ElementTree",
-        "detail": "xml.etree.ElementTree",
-        "documentation": {}
-    },
-    {
-        "label": "sys",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "sys",
-        "description": "sys",
-        "detail": "sys",
+        "importPath": "sys.",
+        "description": "sys.",
+        "detail": "sys.",
         "documentation": {}
     },
     {
@@ -289,15 +248,6 @@
         "description": "interface",
         "isExtraImport": true,
         "detail": "interface",
-        "documentation": {}
-    },
-    {
-        "label": "sys,",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "sys.",
-        "description": "sys.",
-        "detail": "sys.",
         "documentation": {}
     },
     {
@@ -349,7 +299,7 @@
         "kind": 6,
         "importPath": "src.interface",
         "description": "src.interface",
-        "peekOfCode": "class Main_UI(Window_Main[1], Window_Main[0]):\n    def __init__(self, path) -> None:\n        super(Main_UI, self).__init__()\n        self.setupUi(self)\n        self.path = path\n        # Items list\n        self.Text_Display   :QTextBrowser\n        self.Text_Edit      :QPlainTextEdit\n        self.Tab            :QTabWidget\n        self.Save_Button    :QPushButton",
+        "peekOfCode": "class Main_UI(Window_Main[1], Window_Main[0]):\n    def __init__(self, path) -> None:\n        console.info(\"Loading interface %r\" % self.__class__.__qualname__)\n        super(Main_UI, self).__init__()\n        self.setupUi(self)\n        self.path = path\n        # Items list\n        self.Text_Display   :QTextBrowser\n        self.Text_Edit      :QPlainTextEdit\n        self.Tab            :QTabWidget",
         "detail": "src.interface",
         "documentation": {}
     },
@@ -358,7 +308,7 @@
         "kind": 6,
         "importPath": "src.interface",
         "description": "src.interface",
-        "peekOfCode": "class KeyInput_UI(QDialog, Window_KeyInput[1], Window_KeyInput[0]):\n    def __init__(self, parent, hash:str, path:str) -> None:\n        super(KeyInput_UI, self).__init__(parent)\n        self.setupUi(self)\n        self.hash = hash\n        self.path = path\n        # Items list\n        self.Key_Input:QLineEdit\n        self.Key_Label:QLabel\n        self.Key_Radio:QRadioButton",
+        "peekOfCode": "class KeyInput_UI(QDialog, Window_KeyInput[1], Window_KeyInput[0]):\n    def __init__(self, parent, hash:str, path:str) -> None:\n        console.info(\"Loading interface %r\" % self.__class__.__qualname__)\n        super(KeyInput_UI, self).__init__(parent)\n        self.setupUi(self)\n        self.hash = hash\n        self.path = path\n        # Items list\n        self.Key_Input:QLineEdit\n        self.Key_Label:QLabel",
         "detail": "src.interface",
         "documentation": {}
     },
@@ -367,7 +317,7 @@
         "kind": 5,
         "importPath": "src.interface",
         "description": "src.interface",
-        "peekOfCode": "Window_Main =  loadUiType(resource_path(Intercafe_File.main))\nWindow_KeyInput =  loadUiType(resource_path(Intercafe_File.key_input))\n# Builds interfaces\nclass Main_UI(Window_Main[1], Window_Main[0]):\n    def __init__(self, path) -> None:\n        super(Main_UI, self).__init__()\n        self.setupUi(self)\n        self.path = path\n        # Items list\n        self.Text_Display   :QTextBrowser",
+        "peekOfCode": "Window_Main =  loadUiType(resource_path(Intercafe_File.main))\nWindow_KeyInput =  loadUiType(resource_path(Intercafe_File.key_input))\n# Builds interfaces\nclass Main_UI(Window_Main[1], Window_Main[0]):\n    def __init__(self, path) -> None:\n        console.info(\"Loading interface %r\" % self.__class__.__qualname__)\n        super(Main_UI, self).__init__()\n        self.setupUi(self)\n        self.path = path\n        # Items list",
         "detail": "src.interface",
         "documentation": {}
     },
@@ -376,7 +326,7 @@
         "kind": 5,
         "importPath": "src.interface",
         "description": "src.interface",
-        "peekOfCode": "Window_KeyInput =  loadUiType(resource_path(Intercafe_File.key_input))\n# Builds interfaces\nclass Main_UI(Window_Main[1], Window_Main[0]):\n    def __init__(self, path) -> None:\n        super(Main_UI, self).__init__()\n        self.setupUi(self)\n        self.path = path\n        # Items list\n        self.Text_Display   :QTextBrowser\n        self.Text_Edit      :QPlainTextEdit",
+        "peekOfCode": "Window_KeyInput =  loadUiType(resource_path(Intercafe_File.key_input))\n# Builds interfaces\nclass Main_UI(Window_Main[1], Window_Main[0]):\n    def __init__(self, path) -> None:\n        console.info(\"Loading interface %r\" % self.__class__.__qualname__)\n        super(Main_UI, self).__init__()\n        self.setupUi(self)\n        self.path = path\n        # Items list\n        self.Text_Display   :QTextBrowser",
         "detail": "src.interface",
         "documentation": {}
     },
@@ -385,7 +335,7 @@
         "kind": 6,
         "importPath": "src.utility",
         "description": "src.utility",
-        "peekOfCode": "class Res(Enum):\n    SaveIcon = \"resources/save.png\"\nclass Intercafe_File(Enum):\n    main = \"interface/main.ui\"\n    key_input = \"interface/key_input.ui\"\ndef resource_path(relative_path: Res):\n    \"\"\" Get absolute path to resource, works for dev and for PyInstaller \"\"\"\n    try:\n        # PyInstaller creates a temp folder and stores path in _MEIPASS\n        base_path = sys._MEIPASS",
+        "peekOfCode": "class Res(Enum):\n    SaveIcon = \"resources/save.png\"\nclass Intercafe_File(Enum):\n    main = \"interface/main.ui\"\n    key_input = \"interface/key_input.ui\"\ndef resource_path(ressource_path: Res):\n    \"\"\" Get absolute path to resource, works for dev and for PyInstaller \"\"\"\n    return absolute_path(ressource_path.value)\ndef absolute_path(relative_path:str):\n    \"\"\" Get absolute path to resource, works for dev and for PyInstaller \"\"\"",
         "detail": "src.utility",
         "documentation": {}
     },
@@ -394,16 +344,7 @@
         "kind": 6,
         "importPath": "src.utility",
         "description": "src.utility",
-        "peekOfCode": "class Intercafe_File(Enum):\n    main = \"interface/main.ui\"\n    key_input = \"interface/key_input.ui\"\ndef resource_path(relative_path: Res):\n    \"\"\" Get absolute path to resource, works for dev and for PyInstaller \"\"\"\n    try:\n        # PyInstaller creates a temp folder and stores path in _MEIPASS\n        base_path = sys._MEIPASS\n    except Exception:\n        base_path = os.path.abspath(os.path.dirname(__file__))",
-        "detail": "src.utility",
-        "documentation": {}
-    },
-    {
-        "label": "DataBase_DATA",
-        "kind": 6,
-        "importPath": "src.utility",
-        "description": "src.utility",
-        "peekOfCode": "class DataBase_DATA():\n    def __init__(self, version, hint, hash, content) -> None:\n        self._data = {\n            \"version\": version,\n            \"hint\": hint,\n            \"hash\": hash,\n            \"content\": content\n        }\n    # version\n    @property",
+        "peekOfCode": "class Intercafe_File(Enum):\n    main = \"interface/main.ui\"\n    key_input = \"interface/key_input.ui\"\ndef resource_path(ressource_path: Res):\n    \"\"\" Get absolute path to resource, works for dev and for PyInstaller \"\"\"\n    return absolute_path(ressource_path.value)\ndef absolute_path(relative_path:str):\n    \"\"\" Get absolute path to resource, works for dev and for PyInstaller \"\"\"\n    try:\n        # PyInstaller creates a temp folder and stores path in _MEIPASS",
         "detail": "src.utility",
         "documentation": {}
     },
@@ -417,11 +358,38 @@
         "documentation": {}
     },
     {
+        "label": "console",
+        "kind": 6,
+        "importPath": "src.utility",
+        "description": "src.utility",
+        "peekOfCode": "class console():\n    __version__ = \"1.0.0\"\n    LogFile = None\n    loggin = None\n    @classmethod\n    def __init__(cls, \n            LogsDirectory:str, \n            LogDirectory_max_memory:str,\n            LogDirectory_max_age:str,\n            LogFile:str = None, ",
+        "detail": "src.utility",
+        "documentation": {}
+    },
+    {
+        "label": "config",
+        "kind": 6,
+        "importPath": "src.utility",
+        "description": "src.utility",
+        "peekOfCode": "class config():\n    _config:configparser.ConfigParser\n    @classmethod\n    def __init__(cls, config_file:str) -> None:\n        cls.confi_file = absolute_path(config_file)\n        cls._config = configparser.ConfigParser()\n        cls._config.read(cls.confi_file)\n    @classmethod\n    def get(cls, section, option, fallback=None):\n        return cls._config.get(section, option, fallback=fallback)",
+        "detail": "src.utility",
+        "documentation": {}
+    },
+    {
         "label": "resource_path",
         "kind": 2,
         "importPath": "src.utility",
         "description": "src.utility",
-        "peekOfCode": "def resource_path(relative_path: Res):\n    \"\"\" Get absolute path to resource, works for dev and for PyInstaller \"\"\"\n    try:\n        # PyInstaller creates a temp folder and stores path in _MEIPASS\n        base_path = sys._MEIPASS\n    except Exception:\n        base_path = os.path.abspath(os.path.dirname(__file__))\n    return os.path.join(base_path, relative_path.value)\ndef Set_LineInput_Password(object:QLineEdit, state:bool):\n    \"\"\"",
+        "peekOfCode": "def resource_path(ressource_path: Res):\n    \"\"\" Get absolute path to resource, works for dev and for PyInstaller \"\"\"\n    return absolute_path(ressource_path.value)\ndef absolute_path(relative_path:str):\n    \"\"\" Get absolute path to resource, works for dev and for PyInstaller \"\"\"\n    try:\n        # PyInstaller creates a temp folder and stores path in _MEIPASS\n        base_path = sys._MEIPASS\n    except Exception:\n        base_path = os.path.abspath(os.path.dirname(__file__))",
+        "detail": "src.utility",
+        "documentation": {}
+    },
+    {
+        "label": "absolute_path",
+        "kind": 2,
+        "importPath": "src.utility",
+        "description": "src.utility",
+        "peekOfCode": "def absolute_path(relative_path:str):\n    \"\"\" Get absolute path to resource, works for dev and for PyInstaller \"\"\"\n    try:\n        # PyInstaller creates a temp folder and stores path in _MEIPASS\n        base_path = sys._MEIPASS\n    except Exception:\n        base_path = os.path.abspath(os.path.dirname(__file__))\n    return os.path.join(base_path, relative_path)\ndef Set_LineInput_Password(object:QLineEdit, state:bool):\n    \"\"\"",
         "detail": "src.utility",
         "documentation": {}
     },
@@ -448,7 +416,7 @@
         "kind": 2,
         "importPath": "src.utility",
         "description": "src.utility",
-        "peekOfCode": "def check_password(password: str, hashed_password: str) -> bool:\n    try:\n        # Convertir les deux mots de passe en bytes\n        password_bytes = password.encode('utf-8')\n        hashed_password_bytes = hashed_password.encode('utf-8')\n        # Vérifier si le mot de passe correspond au hachage\n        return bcrypt.checkpw(password_bytes, hashed_password_bytes)\n    except:\n        return False\nclass DataBase_DATA():",
+        "peekOfCode": "def check_password(password: str, hashed_password: str) -> bool:\n    try:\n        # Convertir les deux mots de passe en bytes\n        password_bytes = password.encode('utf-8')\n        hashed_password_bytes = hashed_password.encode('utf-8')\n        # Vérifier si le mot de passe correspond au hachage\n        return bcrypt.checkpw(password_bytes, hashed_password_bytes)\n    except:\n        return False\nclass Database():",
         "detail": "src.utility",
         "documentation": {}
     },
@@ -475,7 +443,7 @@
         "kind": 2,
         "importPath": "src.utility",
         "description": "src.utility",
-        "peekOfCode": "def fetch_data_from_db(db:Database):\n    db.cursor.execute(\"SELECT version, hint, hash, content FROM eyz_data WHERE ROWID = 1\")\n    rows = db.cursor.fetchone()\n    return rows\n# Fonction pour modifier des données dans la base de données chiffrée\ndef update_db(db:Database, version, hint, hash, content):\n    db.cursor.execute(\"UPDATE eyz_data SET version = ?, hint = ?, hash = ?, content = ? WHERE ROWID = ?\", \n                      (version, hint, hash, content, \"1\"))\n    db.conn.commit()",
+        "peekOfCode": "def fetch_data_from_db(db:Database):\n    db.cursor.execute(\"SELECT version, hint, hash, content FROM eyz_data WHERE ROWID = 1\")\n    rows = db.cursor.fetchone()\n    return rows\n# Fonction pour modifier des données dans la base de données chiffrée\ndef update_db(db:Database, version, hint, hash, content):\n    db.cursor.execute(\"UPDATE eyz_data SET version = ?, hint = ?, hash = ?, content = ? WHERE ROWID = ?\", \n                      (version, hint, hash, content, \"1\"))\n    db.conn.commit()\nclass console():",
         "detail": "src.utility",
         "documentation": {}
     },
@@ -484,7 +452,34 @@
         "kind": 2,
         "importPath": "src.utility",
         "description": "src.utility",
-        "peekOfCode": "def update_db(db:Database, version, hint, hash, content):\n    db.cursor.execute(\"UPDATE eyz_data SET version = ?, hint = ?, hash = ?, content = ? WHERE ROWID = ?\", \n                      (version, hint, hash, content, \"1\"))\n    db.conn.commit()",
+        "peekOfCode": "def update_db(db:Database, version, hint, hash, content):\n    db.cursor.execute(\"UPDATE eyz_data SET version = ?, hint = ?, hash = ?, content = ? WHERE ROWID = ?\", \n                      (version, hint, hash, content, \"1\"))\n    db.conn.commit()\nclass console():\n    __version__ = \"1.0.0\"\n    LogFile = None\n    loggin = None\n    @classmethod\n    def __init__(cls, ",
+        "detail": "src.utility",
+        "documentation": {}
+    },
+    {
+        "label": "end",
+        "kind": 2,
+        "importPath": "src.utility",
+        "description": "src.utility",
+        "peekOfCode": "def end(ExitCode:int=None, reason:str=None):\n    console.info(\"End => %s\" % reason)\n    sys.exit(ExitCode)\ndef Critical_Error_Popu(parent:QWidget, message:str, error:any=None):\n    console.critical(message, \"=>\", error)\n    QMessageBox.critical(parent, \"CRITICAL ERROR\", message + f'\\n\\nERROR : {str(error)}' if error != None else \"\")\n    end(reason='A critical error occurred !')\ndef Error_popu(parent:QWidget, message:str, error:any=None):\n    console.error(message, \"=>\", str(error))\n    QMessageBox.critical(parent, \"ERROR\", message + f'\\n\\n : {str(error)}' if error != None else \"\")",
+        "detail": "src.utility",
+        "documentation": {}
+    },
+    {
+        "label": "Critical_Error_Popu",
+        "kind": 2,
+        "importPath": "src.utility",
+        "description": "src.utility",
+        "peekOfCode": "def Critical_Error_Popu(parent:QWidget, message:str, error:any=None):\n    console.critical(message, \"=>\", error)\n    QMessageBox.critical(parent, \"CRITICAL ERROR\", message + f'\\n\\nERROR : {str(error)}' if error != None else \"\")\n    end(reason='A critical error occurred !')\ndef Error_popu(parent:QWidget, message:str, error:any=None):\n    console.error(message, \"=>\", str(error))\n    QMessageBox.critical(parent, \"ERROR\", message + f'\\n\\n : {str(error)}' if error != None else \"\")",
+        "detail": "src.utility",
+        "documentation": {}
+    },
+    {
+        "label": "Error_popu",
+        "kind": 2,
+        "importPath": "src.utility",
+        "description": "src.utility",
+        "peekOfCode": "def Error_popu(parent:QWidget, message:str, error:any=None):\n    console.error(message, \"=>\", str(error))\n    QMessageBox.critical(parent, \"ERROR\", message + f'\\n\\n : {str(error)}' if error != None else \"\")",
         "detail": "src.utility",
         "documentation": {}
     },
@@ -493,7 +488,7 @@
         "kind": 5,
         "importPath": "src.utility",
         "description": "src.utility",
-        "peekOfCode": "__version__ = \"1.0.0\"\nclass Res(Enum):\n    SaveIcon = \"resources/save.png\"\nclass Intercafe_File(Enum):\n    main = \"interface/main.ui\"\n    key_input = \"interface/key_input.ui\"\ndef resource_path(relative_path: Res):\n    \"\"\" Get absolute path to resource, works for dev and for PyInstaller \"\"\"\n    try:\n        # PyInstaller creates a temp folder and stores path in _MEIPASS",
+        "peekOfCode": "__version__ = \"1.0.0\"\nclass Res(Enum):\n    SaveIcon = \"resources/save.png\"\nclass Intercafe_File(Enum):\n    main = \"interface/main.ui\"\n    key_input = \"interface/key_input.ui\"\ndef resource_path(ressource_path: Res):\n    \"\"\" Get absolute path to resource, works for dev and for PyInstaller \"\"\"\n    return absolute_path(ressource_path.value)\ndef absolute_path(relative_path:str):",
         "detail": "src.utility",
         "documentation": {}
     }

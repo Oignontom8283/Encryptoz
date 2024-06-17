@@ -2,15 +2,16 @@ import os, json, sys
 from PyQt5.QtWidgets import QStatusBar, QMessageBox, QTextBrowser, QPlainTextEdit, QTabWidget,QLineEdit, QRadioButton, QDialog, QFileDialog, QLabel, QPushButton
 from PyQt5.uic import loadUiType, loadUi
 from PyQt5 import QtGui, QtCore
-from utility import __version__, Res, Intercafe_File, resource_path, hash_password, check_password, Set_LineInput_Password, create_db, connect_db, fetch_data_from_db, update_db
+from utility import *
+from utility import __version__
 from crypting import encrypt, decrypt
-import xml.etree.ElementTree as ET
 
 # Load global resources
 # App_Icon = resource_path('./resources/icon/icon.ico')
 
 
 # Load UI
+#console.info("All interfaces preloading")
 Window_Main =  loadUiType(resource_path(Intercafe_File.main))
 Window_KeyInput =  loadUiType(resource_path(Intercafe_File.key_input))
 
@@ -19,6 +20,8 @@ Window_KeyInput =  loadUiType(resource_path(Intercafe_File.key_input))
 
 class Main_UI(Window_Main[1], Window_Main[0]):
     def __init__(self, path) -> None:
+        console.info("Loading interface %r" % self.__class__.__qualname__)
+
         super(Main_UI, self).__init__()
         self.setupUi(self)
         
@@ -39,8 +42,10 @@ class Main_UI(Window_Main[1], Window_Main[0]):
 
         # Build status bar
         self.FilePathLabel = QLabel('')
+        self.SaveIndicate = QLabel('')
 
         self.statusbar.addWidget(self.FilePathLabel)
+        self.statusbar.addPermanentWidget(self.SaveIndicate)
 
         # Set Save_Button icon
         icon = QtGui.QIcon()
@@ -65,13 +70,6 @@ class Main_UI(Window_Main[1], Window_Main[0]):
         
 
     def Check_Encoding_Radio(self, e:bool):
-        # Si le Radio et check on mais le champ de texte en mods password
-
-        # if e:
-        #     self.Encoding_Input.setEchoMode(QtWidgets.QLineEdit.Password)
-        # else:
-        #     self.Encoding_Input.setEchoMode(QtWidgets.QLineEdit.Normal)
-
         Set_LineInput_Password(self.Encoding_Input, e)
 
     def TextChange_Text_Edit(self):
@@ -85,13 +83,19 @@ class Main_UI(Window_Main[1], Window_Main[0]):
         if self.path is not None:   
 
             self.path = os.path.abspath(self.path)
-
+            console.info("Starting the file %r loading process" % self.path)
+            
             # Chargement du contenue du fichier
+
             self.db = connect_db(self.path)
 
             # Load data
 
-            data = fetch_data_from_db(self.db)
+            try:
+                data = fetch_data_from_db(self.db)
+            except Exception as e:
+                Critical_Error_Popu(self, "A problem occurred while retrieving data", e)
+
             self.file_version = data[0]
             self.hint:str = data[1]
             self.hash:str = data[2]
@@ -112,69 +116,80 @@ class Main_UI(Window_Main[1], Window_Main[0]):
 
             # Uncrypt content
 
-            self.Content = decrypt(
-                encrypted_text= self.Encrypt_Content,
-                key= self.key
-            )
+            try:
+                self.Content = decrypt(
+                    encrypted_text= self.Encrypt_Content,
+                    key= self.key
+                )
+                console.info("Decryption carried out successfully.")
+            except Exception as e:
+                Critical_Error_Popu(self, "An error occurred during content decryption", e)
 
             # Charger les info dans la fenetre
             self.Text_Edit.setPlainText(self.Content)
             self.Text_Display.setMarkdown(self.Content)
             self.Encoding_Input.setText(self.key)
+
+            self.FilePathLabel.setText(self.path)
         
     def Clicked_SaveButton(self):
         
         key = self.Encoding_Input.text()
         if key is "":
+            console.warning("The encryption key is not specified!")
             QMessageBox.information(self, "WARNIG !", "You did not specify an encryption key !")
             return
+        
 
-        text = self.Text_Edit.toPlainText()
+        # self.SaveIndicate.setText("Saving...")
+        # timer = QtCore.QTime()
+        # timer.setSingleShot(True)  # Assurez-vous que le timer se déclenche une seule fois
+        # timer.timeout.connect(lambda: self.SaveIndicate.setText(""))
 
         self.Save_Button.setEnabled(False)
         self.Text_Edit.setFocus()
+
+        text = self.Text_Edit.toPlainText()
+
 
         if self.path is None:
 
             options = QFileDialog.Options()
             fileName, _ = QFileDialog.getSaveFileName(self, "Save file", "", "Encryptoz file (*.eyz);;All the files (*)", options=options)
-            print(fileName)
+            
             if fileName is "":
+                console.info("Saving file abort")
+                return
+            
+            console.info("fileName is %s" % fileName)
+
+            try:
+                self.db = create_db(fileName)
+                console.info("File create at %s" % fileName)
+            except Exception as e:
+                Error_popu(self, "The file could not be created !", e)
+                self.Save_Button.setEnabled(True)
                 return
 
-            self.db = create_db(fileName)
-            self.key = key
-            self.Encrypt_Content = encrypt(text, key)
-            self.hint = "truc"
-            self.hash = hash_password(key)
-            self.Content = text
             self.path = fileName
-
-            update_db(
-                db=self.db,
-                version=__version__,
-                hint=self.hint,
-                hash=self.hash,
-                content=self.Encrypt_Content
-            )
+            self.file_version = __version__
 
         else:
 
             if self.key != key:
-                reply = QMessageBox.question(self, 'the key is different !', 'The encryption key is different. Are you sure you want to change it?',
+                reply = QMessageBox.question(self, 'the key is different !', 'The encryption key is different. Are you sure you want to change it ?',
                                          QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
 
-                if reply == QMessageBox.Yes:
-                    pass
-                else:
+                if reply is not QMessageBox.Yes:
                     return
             
-            self.key = key
-            self.Encrypt_Content = encrypt(text, key)
-            self.hint = "h"
-            self.hash = hash_password(key)
-            self.Content = text
-
+        self.hint = "h"
+        self.Content = text
+        self.hash = hash_password(key)
+        self.Encrypt_Content = encrypt(text, key)
+        self.key = key
+        
+        try:
             update_db(
                 self.db,
                 version=self.file_version,
@@ -182,14 +197,20 @@ class Main_UI(Window_Main[1], Window_Main[0]):
                 hash=self.hash,
                 content=self.Encrypt_Content
             )
+        except Exception as e:
+            text = "The data could not be saved to the file => %s" % e
+            console.error(text)
+            QMessageBox.warning(self, "ERROR", text)
 
-            
-
+        # timer.start(1000)
+        
 
 
 class KeyInput_UI(QDialog, Window_KeyInput[1], Window_KeyInput[0]):
     
     def __init__(self, parent, hash:str, path:str) -> None:
+        console.info("Loading interface %r" % self.__class__.__qualname__)
+
         super(KeyInput_UI, self).__init__(parent)
         self.setupUi(self)
 
@@ -239,13 +260,4 @@ class KeyInput_UI(QDialog, Window_KeyInput[1], Window_KeyInput[0]):
         #self.close()
 
     def closeEvent(self, event):
-
-        # reply = QMessageBox.question(self, 'Confirmation', 'Êtes-vous sûr de vouloir fermer la fenêtre?',
-        #                              QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
-
-        # if reply == QMessageBox.Yes:
-        #     sys.exit()
-        # else:
-        #     event.ignore()  # Empêche la fermeture de la fenêtre
-
-        sys.exit()
+        end(1, "The user exited from the key request window.")
